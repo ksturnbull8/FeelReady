@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>Staff Resources — Feel Ready</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --nhs-blue: #005EB8;
+      --nhs-blue-soft: #4A9FD4;
+      --nhs-blue-light: #D5E8F5;
+      --nhs-blue-pale: #EBF4FB;
+      --nhs-charcoal: #2C3E50;
+      --nhs-charcoal-mid: #4A5568;
+      --nhs-grey2: #768692;
+      --nhs-grey3: #A0ADB5;
+      --nhs-grey4: #D8DDE0;
+      --nhs-grey5: #F8FAFB;
+    }
+    body { font-family: 'DM Sans', sans-serif; color: var(--nhs-charcoal); background: var(--nhs-grey5); min-height: 100vh; }
+
+    .fr-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.75rem; background: var(--nhs-blue); height: 60px;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .fr-logo { font-size: 20px; font-weight: 500; color: white; text-decoration: none; }
+    .fr-logo span { color: #9BD4F5; }
+    .fr-back-btn {
+      font-size: 13px; color: white; opacity: 0.85;
+      border: 1px solid rgba(255,255,255,0.35); background: none; padding: 6px 14px;
+      border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.15s, background 0.15s;
+    }
+    .fr-back-btn:hover { opacity: 1; background: rgba(255,255,255,0.12); }
+
+    .fr-hero {
+      background: var(--nhs-blue-pale);
+      border-bottom: 1px solid var(--nhs-blue-light);
+      padding: 2rem 1.75rem 1.75rem;
+    }
+    .fr-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--nhs-blue-soft); margin-bottom: 0.4rem; }
+    .fr-hero h1 { font-size: 28px; font-weight: 500; color: var(--nhs-charcoal); margin-bottom: 0.4rem; }
+    .fr-hero p { font-size: 14px; color: var(--nhs-grey2); margin-bottom: 1.25rem; }
+    .fr-search-bar {
+      display: flex; align-items: center; gap: 8px;
+      max-width: 420px;
+      border: 1.5px solid var(--nhs-blue-light); border-radius: 4px; padding: 8px 14px;
+      background: white;
+    }
+    .fr-search-bar:focus-within { border-color: var(--nhs-blue-soft); }
+    .fr-search-bar input {
+      border: none; background: none; outline: none;
+      font-family: 'DM Sans', sans-serif; font-size: 14px;
+      color: var(--nhs-charcoal); flex: 1;
+    }
+    .fr-search-icon { color: var(--nhs-grey3); width: 16px; height: 16px; flex-shrink: 0; }
+
+    .fr-body { padding: 1.25rem 1.25rem 2rem; }
+    .fr-section { margin-bottom: 1.75rem; }
+    .fr-section-title {
+      font-size: 18px; font-weight: 500; color: var(--nhs-charcoal);
+      margin-bottom: 0.75rem; padding-bottom: 0.6rem;
+      border-bottom: 1.5px solid var(--nhs-grey4);
+    }
+
+    .fr-resource-card {
+      border: 1px solid var(--nhs-grey4);
+      border-radius: 4px; background: white; margin-bottom: 10px; overflow: hidden;
+    }
+    .fr-resource-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; cursor: pointer; gap: 12px; user-select: none;
+    }
+    .fr-resource-header:hover { background: var(--nhs-blue-pale); }
+    .fr-resource-left { display: flex; align-items: center; gap: 12px; }
+    .fr-resource-icon {
+      width: 38px; height: 38px; border-radius: 4px;
+      background: var(--nhs-blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .fr-resource-icon svg { color: var(--nhs-blue-soft); }
+    .fr-resource-name { font-size: 14px; font-weight: 500; color: var(--nhs-charcoal); }
+    .fr-resource-desc { font-size: 12px; color: var(--nhs-grey2); margin-top: 2px; }
+    .fr-resource-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .fr-pdf-btn {
+      font-size: 12px; color: var(--nhs-blue); border: 1px solid var(--nhs-blue-light);
+      background: none; padding: 5px 10px; border-radius: 4px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+      font-weight: 500; white-space: nowrap; transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .fr-pdf-btn:hover { background: var(--nhs-blue); color: white; border-color: var(--nhs-blue); }
+    .fr-chevron { transition: transform 0.2s; color: var(--nhs-grey3); flex-shrink: 0; }
+    .fr-chevron.open { transform: rotate(180deg); }
+
+    .fr-translations { display: none; padding: 0 16px 14px; border-top: 1px solid var(--nhs-grey4); background: var(--nhs-grey5); }
+    .fr-translations.open { display: block; }
+    .fr-trans-label { font-size: 11px; color: var(--nhs-grey2); text-transform: uppercase; letter-spacing: 0.8px; margin: 10px 0 8px; font-weight: 500; }
+    .fr-trans-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+    .fr-trans-pill {
+      font-size: 12px; padding: 5px 10px;
+      border: 1px solid var(--nhs-grey4); border-radius: 4px;
+      text-decoration: none; color: var(--nhs-charcoal); background: white;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .fr-trans-pill:hover { border-color: var(--nhs-blue-soft); background: var(--nhs-blue-pale); }
+    .fr-trans-pill-native { font-weight: 500; font-size: 12px; }
+    .fr-trans-pill-eng { font-size: 11px; color: var(--nhs-grey2); }
+
+    .fr-phrases-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+    .fr-phrase-card {
+      display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+      border: 1px solid var(--nhs-grey4); border-radius: 4px; background: white;
+      text-decoration: none; transition: border-color 0.15s, background 0.15s;
+    }
+    .fr-phrase-card:hover { border-color: var(--nhs-blue-soft); background: var(--nhs-blue-pale); }
+    .fr-phrase-native { font-size: 13px; font-weight: 500; color: var(--nhs-charcoal); }
+    .fr-phrase-eng { font-size: 11px; color: var(--nhs-grey2); }
+    .fr-phrase-dl { margin-left: auto; color: var(--nhs-grey3); flex-shrink: 0; }
+
+    .fr-footer { background: white; border-top: 1px solid var(--nhs-grey4); padding: 0.75rem 1.75rem; }
+    .fr-footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
+    .fr-footer-owners { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .fr-footer-owners a { font-size: 11px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-owners a:hover { text-decoration: underline; }
+    .fr-footer-sep { color: var(--nhs-grey4); font-size: 11px; }
+    .fr-footer-credit { font-size: 11px; color: var(--nhs-grey2); display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+    .fr-footer-credit strong { color: var(--nhs-charcoal-mid); font-weight: 500; }
+    .fr-footer-legal { display: flex; justify-content: flex-end; }
+    .fr-footer-legal a { font-size: 11px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-legal a:hover { text-decoration: underline; }
+    .fr-footer-disclaimer { font-size: 10px; color: var(--nhs-grey2); text-align: center; padding-top: 0.5rem; border-top: 1px solid var(--nhs-grey4); margin-top: 0.6rem; }
+
+    @media (max-width: 600px) {
+      .fr-footer-row { grid-template-columns: 1fr; gap: 8px; }
+      .fr-footer-legal { justify-content: flex-start; }
+      .fr-footer-credit { align-items: flex-start; }
+      .fr-resource-actions { flex-direction: column; align-items: flex-end; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="fr-header">
+    <a href="index.html" class="fr-logo">feel<span>ready</span></a>
+    <a href="index.html" class="fr-back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      All languages
+    </a>
+  </header>
+
+  <div class="fr-hero">
+    <p class="fr-eyebrow">Clinical team</p>
+    <h1 id="main-content">Staff Resources</h1>
+    <p>Leaflets and phrase cards for use with patients — expand each resource to see translations</p>
+    <div class="fr-search-bar">
+      <svg class="fr-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="staff-search" placeholder="Search language…" oninput="filterAll(this.value)" aria-label="Search languages" />
+    </div>
+  </div>
+
+  <main class="fr-body">
+
+    <section class="fr-section">
+      <h2 class="fr-section-title">Clinical leaflets</h2>
+
+      <div class="fr-resource-card">
+        <div class="fr-resource-header" onclick="toggle(this)" aria-expanded="false">
+          <div class="fr-resource-left">
+            <div class="fr-resource-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div>
+              <div class="fr-resource-name">Anaesthetics and Pregnant Women with a High BMI</div>
+              <div class="fr-resource-desc">OAA leaflet · English + 19 translations</div>
+            </div>
+          </div>
+          <div class="fr-resource-actions">
+            <a class="fr-pdf-btn" href="https://www.labourpains.org/downloads/english-resources/a4-high-bmi-leaflet.pdf" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              English PDF
+            </a>
+            <svg class="fr-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="fr-translations">
+          <div class="fr-trans-label">Translations</div>
+          <div class="fr-trans-grid" id="bmi-trans"></div>
+        </div>
+      </div>
+
+      <div class="fr-resource-card">
+        <div class="fr-resource-header" onclick="toggle(this)" aria-expanded="false">
+          <div class="fr-resource-left">
+            <div class="fr-resource-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div>
+              <div class="fr-resource-name">Headache After Epidural or Spinal</div>
+              <div class="fr-resource-desc">OAA leaflet · English + 26 translations</div>
+            </div>
+          </div>
+          <div class="fr-resource-actions">
+            <a class="fr-pdf-btn" href="https://www.labourpains.org/downloads/english-resources/Headache_after_epidural.pdf" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              English PDF
+            </a>
+            <svg class="fr-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="fr-translations">
+          <div class="fr-trans-label">Translations</div>
+          <div class="fr-trans-grid" id="headache-trans"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fr-section">
+      <h2 class="fr-section-title">Commonly needed phrases</h2>
+      <div class="fr-phrases-grid" id="phrases-grid"></div>
+      <p id="no-results" style="display:none; font-size:13px; color:var(--nhs-grey2); margin-top:8px;">No languages found</p>
+    </section>
+
+  </main>
+
+  <footer class="fr-footer">
+    <div class="fr-footer-row">
+      <div class="fr-footer-owners">
+        <a href="https://www.labourpains.org" target="_blank" rel="noopener">OAA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://rcoa.ac.uk" target="_blank" rel="noopener">RCoA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://www.nhslothian.scot" target="_blank" rel="noopener">NHS Lothian</a>
+      </div>
+      <div class="fr-footer-credit">
+        <span>Created by <strong>Dr Katie Turnbull</strong></span>
+        <span>Improving the quality of care for women</span>
+      </div>
+      <div class="fr-footer-legal">
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+    <p class="fr-footer-disclaimer">This site does not own or host any linked content. All materials are the property of their respective authors.</p>
+  </footer>
+
+  <script>
+    function toggle(header) {
+      const card = header.closest('.fr-resource-card');
+      const trans = card.querySelector('.fr-translations');
+      const chev = header.querySelector('.fr-chevron');
+      const open = trans.classList.toggle('open');
+      chev.classList.toggle('open', open);
+      header.setAttribute('aria-expanded', open);
+    }
+
+    const bmiTranslations = [
+      { lang: "Arabic",     native: "العربية",   flag: "🇸🇦", url: "https://www.labourpains.org/downloads/translated-content/arabic/a4highbmileaflet-arabic.pdf" },
+      { lang: "Bengali",    native: "বাংলা",     flag: "🇧🇩", url: "https://www.labourpains.org/downloads/translated-content/bengali/a4highbmileaflet-bengali.pdf" },
+      { lang: "Bulgarian",  native: "Български", flag: "🇧🇬", url: "https://www.labourpains.org/downloads/translated-content/bulgarian/a4highbmileaflet-bulgarian.pdf" },
+      { lang: "Chinese",    native: "中文",       flag: "🇨🇳", url: "https://www.labourpains.org/downloads/translated-content/chinese-(simplified)/a4highbmileaflet-chinese.pdf" },
+      { lang: "Farsi",      native: "فارسی",     flag: "🇮🇷", url: "https://www.labourpains.org/downloads/translated-content/farsi/a4highbmileaflet-persian.pdf" },
+      { lang: "French",     native: "Français",  flag: "🇫🇷", url: "https://www.labourpains.org/downloads/translated-content/french/A4_High_BMI_Leaflet-French.pdf" },
+      { lang: "German",     native: "Deutsch",   flag: "🇩🇪", url: "https://www.labourpains.org/downloads/translated-content/german/a4highbmileaflet-german.pdf" },
+      { lang: "Gujarati",   native: "ગુજરાતી",   flag: "🇮🇳", url: "https://www.labourpains.org/downloads/translated-content/gujurati/highbmigujarati.pdf" },
+      { lang: "Italian",    native: "Italiano",  flag: "🇮🇹", url: "https://www.labourpains.org/downloads/translated-content/italian/a4highbmileaflet-italian.pdf" },
+      { lang: "Lithuanian", native: "Lietuvių",  flag: "🇱🇹", url: "https://www.labourpains.org/downloads/translated-content/lithuanian/a4highbmileaflet-lithuanian.pdf" },
+      { lang: "Polish",     native: "Polski",    flag: "🇵🇱", url: "https://www.labourpains.org/downloads/translated-content/polish/a4highbmileaflet-polish.pdf" },
+      { lang: "Portuguese", native: "Português", flag: "🇵🇹", url: "https://www.labourpains.org/downloads/translated-content/portuguese/highbmiportuguese.pdf" },
+      { lang: "Punjabi",    native: "ਪੰਜਾਬੀ",    flag: "🇮🇳", url: "https://www.labourpains.org/downloads/translated-content/punjabi/highbmipunjabi.pdf" },
+      { lang: "Romanian",   native: "Română",    flag: "🇷🇴", url: "https://www.labourpains.org/downloads/translated-content/romanian/a4highbmileaflet-romanian.pdf" },
+      { lang: "Somali",     native: "Soomaali",  flag: "🇸🇴", url: "https://www.labourpains.org/downloads/translated-content/somali/highbmisomali.pdf" },
+      { lang: "Spanish",    native: "Español",   flag: "🇪🇸", url: "https://www.labourpains.org/downloads/translated-content/spanish/a4highbmileaflet-spanish.pdf" },
+      { lang: "Tagalog",    native: "Tagalog",   flag: "🇵🇭", url: "https://www.labourpains.org/downloads/translated-content/tagalog/a4highbmileaflet-tagalog.pdf" },
+      { lang: "Tamil",      native: "தமிழ்",     flag: "🇱🇰", url: "https://www.labourpains.org/downloads/translated-content/tamil/highbmitamil.pdf" },
+      { lang: "Turkish",    native: "Türkçe",    flag: "🇹🇷", url: "https://www.labourpains.org/downloads/translated-content/turkish/a4highbmileaflet-turkish.pdf" },
+    ];
+
+    const headacheTranslations = [
+      { lang: "Albanian",   native: "Shqip",        flag: "🇦🇱", url: "https://www.labourpains.org/downloads/translated-content/albania/headache-after-epidural-albanian.pdf" },
+      { lang: "Arabic",     native: "العربية",       flag: "🇸🇦", url: "https://www.labourpains.org/downloads/translated-content/arabic/a4heahacheposter-web-arabic.pdf" },
+      { lang: "Bengali",    native: "বাংলা",         flag: "🇧🇩", url: "https://www.labourpains.org/downloads/translated-content/bengali/headacheafterepidural-bengali-new-(1).pdf" },
+      { lang: "Bulgarian",  native: "Български",     flag: "🇧🇬", url: "https://www.labourpains.org/downloads/translated-content/bulgarian/headache-after-epidural-or-spinal---bulgarian.pdf" },
+      { lang: "Chinese",    native: "中文",           flag: "🇨🇳", url: "https://www.labourpains.org/downloads/translated-content/chinese-(simplified)/a4heahacheposter-web-chinese.pdf" },
+      { lang: "Danish",     native: "Dansk",         flag: "🇩🇰", url: "https://www.labourpains.org/downloads/translated-content/danish/headacheafterepiduraldanish.pdf" },
+      { lang: "Farsi",      native: "فارسی",         flag: "🇮🇷", url: "https://www.labourpains.org/downloads/translated-content/farsi/update---headache-after-epidural-or-spinal---farsi.pdf" },
+      { lang: "French",     native: "Français",      flag: "🇫🇷", url: "https://www.labourpains.org/downloads/translated-content/french/A4_Heahache_Poster_-_Web-French.pdf" },
+      { lang: "German",     native: "Deutsch",       flag: "🇩🇪", url: "https://www.labourpains.org/downloads/translated-content/german/a4heahacheposter-web-german.pdf" },
+      { lang: "Gujarati",   native: "ગુજરાતી",       flag: "🇮🇳", url: "https://www.labourpains.org/downloads/translated-content/gujurati/a4heahacheposter-web-gujurati.pdf" },
+      { lang: "Hebrew",     native: "עברית",         flag: "🇮🇱", url: "https://www.labourpains.org/downloads/translated-content/hebrew/a4-headache-leaflet-july-2016-hebrew.pdf" },
+      { lang: "Irish",      native: "Gaeilge",       flag: "🇮🇪", url: "https://www.labourpains.org/downloads/translated-content/irish/a4-headache-leaflet-july-2016-irish.pdf" },
+      { lang: "Italian",    native: "Italiano",      flag: "🇮🇹", url: "https://www.labourpains.org/downloads/translated-content/italian/headache-after-epidural-or-spinal---italy.pdf" },
+      { lang: "Kurdish",    native: "Kurdî",         flag: "🇮🇶", url: "https://www.labourpains.org/downloads/translated-content/kurdish/a4heahacheposter-kurdish.pdf" },
+      { lang: "Lithuanian", native: "Lietuvių",      flag: "🇱🇹", url: "https://www.labourpains.org/downloads/translated-content/lithuanian/a4heahacheposter-web-lithuanian.pdf" },
+      { lang: "Polish",     native: "Polski",        flag: "🇵🇱", url: "https://www.labourpains.org/downloads/translated-content/polish/headacheafterepidural-polish-(1).pdf" },
+      { lang: "Portuguese", native: "Português",     flag: "🇵🇹", url: "https://www.labourpains.org/downloads/translated-content/portuguese/update---headache-after-epidural-or-spinal---portuguese.pdf" },
+      { lang: "Punjabi",    native: "ਪੰਜਾਬੀ",        flag: "🇮🇳", url: "https://www.labourpains.org/downloads/translated-content/punjabi/update---headache-after-epidural-or-spinal---punjabi.pdf" },
+      { lang: "Romanian",   native: "Română",        flag: "🇷🇴", url: "https://www.labourpains.org/downloads/translated-content/romanian/update---headache-after-epidural-or-spinal---romanian.pdf" },
+      { lang: "Russian",    native: "Русский",       flag: "🇷🇺", url: "https://www.labourpains.org/downloads/translated-content/russian/a4heahacheposter-web-russian2018.pdf" },
+      { lang: "Sinhala",    native: "සිංහල",         flag: "🇱🇰", url: "https://www.labourpains.org/downloads/translated-content/sinhala/a4-headache-leaflet-sinhala.pdf" },
+      { lang: "Slovenian",  native: "Slovenščina",   flag: "🇸🇮", url: "https://www.labourpains.org/downloads/translated-content/slovenian/headache-after-epidural-or-spinal---slovenian.pdf" },
+      { lang: "Somali",     native: "Soomaali",      flag: "🇸🇴", url: "https://www.labourpains.org/downloads/translated-content/somali/update---headache-after-epidural-or-spinal---somali.pdf" },
+      { lang: "Spanish",    native: "Español",       flag: "🇪🇸", url: "https://www.labourpains.org/downloads/translated-content/spanish/headache-after-epidural-or-spinal---spanish.pdf" },
+      { lang: "Tagalog",    native: "Tagalog",       flag: "🇵🇭", url: "https://www.labourpains.org/downloads/translated-content/tagalog/a4heahacheposter-web-tagalog.pdf" },
+      { lang: "Tamil",      native: "தமிழ்",         flag: "🇱🇰", url: "https://www.labourpains.org/downloads/translated-content/tamil/a4heahacheposter-web-tamil.pdf" },
+      { lang: "Turkish",    native: "Türkçe",        flag: "🇹🇷", url: "https://www.labourpains.org/downloads/translated-content/turkish/a4heahacheposter-web-turkish.pdf" },
+      { lang: "Urdu",       native: "اردو",          flag: "🇵🇰", url: "https://www.labourpains.org/downloads/translated-content/urdu/a4heahacheposter-web-urdu.pdf" },
+      { lang: "Welsh",      native: "Cymraeg",       flag: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", url: "https://www.labourpains.org/downloads/translated-content/welsh/heahache-after-epidural-or-spinal---welsh.pdf" },
+    ];
+
+    const phrases = [
+      { lang: "Arabic",     native: "العربية",    flag: "🇸🇦", url: "https://www.labourpains.org/downloads/translated-content/arabic/phrase-card---arabic.pdf" },
+      { lang: "Bengali",    native: "বাংলা",      flag: "🇧🇩", url: "https://www.labourpains.org/downloads/translated-content/bengali/phrase-card---bengali.pdf" },
+      { lang: "Bulgarian",  native: "Български",  flag: "🇧🇬", url: "https://www.labourpains.org/downloads/translated-content/bulgarian/phrase-card---bulgarian.pdf" },
+      { lang: "Farsi",      native: "فارسی",      flag: "🇮🇷", url: "https://www.labourpains.org/downloads/translated-content/farsi/phrase-card---farsi.pdf" },
+      { lang: "French",     native: "Français",   flag: "🇫🇷", url: "https://www.labourpains.org/downloads/translated-content/french/phrase%20card%20-%20french.pdf" },
+      { lang: "German",     native: "Deutsch",    flag: "🇩🇪", url: "https://www.labourpains.org/downloads/translated-content/german/phrase-card---german.pdf" },
+      { lang: "Italian",    native: "Italiano",   flag: "🇮🇹", url: "https://www.labourpains.org/downloads/translated-content/italian/phrase-card---italian.pdf" },
+      { lang: "Lithuanian", native: "Lietuvių",   flag: "🇱🇹", url: "https://www.labourpains.org/downloads/translated-content/lithuanian/phrase-card---lithuanian.pdf" },
+      { lang: "Polish",     native: "Polski",     flag: "🇵🇱", url: "https://www.labourpains.org/downloads/translated-content/polish/phrase-card---polish.pdf" },
+      { lang: "Portuguese", native: "Português",  flag: "🇵🇹", url: "https://www.labourpains.org/downloads/translated-content/portuguese/phrase-card---portuguese.pdf" },
+      { lang: "Romanian",   native: "Română",     flag: "🇷🇴", url: "https://www.labourpains.org/downloads/translated-content/romanian/phrase-card---romanian.pdf" },
+      { lang: "Slovenian",  native: "Slovenščina",flag: "🇸🇮", url: "https://www.labourpains.org/downloads/translated-content/slovenian/phrase-card---slovenian.pdf" },
+      { lang: "Somali",     native: "Soomaali",   flag: "🇸🇴", url: "https://www.labourpains.org/downloads/translated-content/somali/phrase-card---somali.pdf" },
+      { lang: "Spanish",    native: "Español",    flag: "🇪🇸", url: "https://www.labourpains.org/downloads/translated-content/spanish/phrase-card---spanish.pdf" },
+      { lang: "Tagalog",    native: "Tagalog",    flag: "🇵🇭", url: "https://www.labourpains.org/downloads/translated-content/tagalog/phrase-card---tagalog.pdf" },
+      { lang: "Turkish",    native: "Türkçe",     flag: "🇹🇷", url: "https://www.labourpains.org/downloads/translated-content/turkish/phrase-card---turkish.pdf" },
+    ];
+
+    function pillHTML(t) {
+      return '<a class="fr-trans-pill" href="' + t.url + '" target="_blank" rel="noopener">' +
+        '<span aria-hidden="true">' + t.flag + '</span>' +
+        '<span><span class="fr-trans-pill-native">' + t.native + '</span> ' +
+        '<span class="fr-trans-pill-eng">' + t.lang + '</span></span></a>';
+    }
+
+    function buildPills(data, id) {
+      document.getElementById(id).innerHTML = data.map(pillHTML).join('');
+    }
+
+    function buildPhrases(data) {
+      document.getElementById('phrases-grid').innerHTML = data.map(p =>
+        '<a class="fr-phrase-card" href="' + p.url + '" target="_blank" rel="noopener">' +
+        '<span aria-hidden="true" style="font-size:20px;flex-shrink:0">' + p.flag + '</span>' +
+        '<div><div class="fr-phrase-native">' + p.native + '</div>' +
+        '<div class="fr-phrase-eng">' + p.lang + '</div></div>' +
+        '<svg class="fr-phrase-dl" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
+        '</a>'
+      ).join('');
+      document.getElementById('no-results').style.display = data.length === 0 ? 'block' : 'none';
+    }
+
+    function filterAll(query) {
+      const q = query.toLowerCase().trim();
+      const match = d => !q || d.lang.toLowerCase().includes(q) || d.native.toLowerCase().includes(q);
+      buildPills(bmiTranslations.filter(match), 'bmi-trans');
+      buildPills(headacheTranslations.filter(match), 'headache-trans');
+      buildPhrases(phrases.filter(match));
+    }
+
+    buildPills(bmiTranslations, 'bmi-trans');
+    buildPills(headacheTranslations, 'headache-trans');
+    buildPhrases(phrases);
+  </script>
+</body>
+</html>

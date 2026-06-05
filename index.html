@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>Pain Relief Options in Labour &amp; Caesarean Birth — Feel Ready</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --nhs-blue: #005EB8;
+      --nhs-blue-soft: #4A9FD4;
+      --nhs-blue-light: #D5E8F5;
+      --nhs-blue-pale: #EBF4FB;
+      --nhs-charcoal: #2C3E50;
+      --nhs-charcoal-mid: #4A5568;
+      --nhs-grey2: #768692;
+      --nhs-grey3: #A0ADB5;
+      --nhs-grey4: #D8DDE0;
+      --nhs-grey5: #F8FAFB;
+    }
+    body { font-family: 'DM Sans', sans-serif; color: var(--nhs-charcoal); background: var(--nhs-grey5); min-height: 100vh; }
+
+    .fr-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.75rem; background: var(--nhs-blue); height: 60px;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .fr-logo { font-size: 20px; font-weight: 500; color: white; text-decoration: none; }
+    .fr-logo span { color: #9BD4F5; }
+    .fr-staff-btn {
+      font-size: 13px; color: white; opacity: 0.85;
+      border: 1px solid rgba(255,255,255,0.35); background: none; padding: 6px 14px;
+      border-radius: 4px; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.15s, background 0.15s;
+    }
+    .fr-staff-btn:hover { opacity: 1; background: rgba(255,255,255,0.12); }
+
+    .fr-hero {
+      background: var(--nhs-blue-pale);
+      border-bottom: 1px solid var(--nhs-blue-light);
+      padding: 2.5rem 1.75rem 2rem;
+      text-align: center;
+    }
+    .fr-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--nhs-blue-soft); margin-bottom: 0.5rem; }
+    .fr-hero h1 { font-size: 26px; font-weight: 500; color: var(--nhs-charcoal); margin-bottom: 1.25rem; line-height: 1.3; }
+    .fr-search-wrap { display: flex; justify-content: center; }
+    .fr-search-bar {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; max-width: 420px;
+      border: 1.5px solid var(--nhs-blue-light); border-radius: 4px; padding: 9px 16px;
+      background: white;
+    }
+    .fr-search-bar:focus-within { border-color: var(--nhs-blue-soft); }
+    .fr-search-bar input {
+      border: none; background: none; outline: none;
+      font-family: 'DM Sans', sans-serif; font-size: 15px;
+      color: var(--nhs-charcoal); flex: 1;
+    }
+    .fr-search-bar svg { flex-shrink: 0; color: var(--nhs-grey3); }
+
+    .fr-body { padding: 0 1.25rem 1.5rem; }
+    .fr-section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--nhs-grey2); padding: 1rem 0.25rem 0.6rem;
+    }
+    .fr-lang-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px;
+    }
+    .fr-lang-card {
+      display: flex; align-items: center; gap: 10px; padding: 11px 13px;
+      border: 1px solid var(--nhs-grey4);
+      border-radius: 4px; background: white;
+      text-decoration: none; transition: background 0.15s, border-color 0.15s;
+    }
+    .fr-lang-card:hover { background: var(--nhs-blue-pale); border-color: var(--nhs-blue-soft); }
+    .fr-lang-flag { font-size: 22px; line-height: 1; flex-shrink: 0; }
+    .fr-lang-native { font-size: 13px; font-weight: 500; color: var(--nhs-charcoal); line-height: 1.2; }
+    .fr-lang-name { font-size: 11px; color: var(--nhs-grey2); margin-top: 1px; }
+
+    .fr-footer { background: white; border-top: 1px solid var(--nhs-grey4); padding: 0.9rem 1.75rem; }
+    .fr-footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
+    .fr-footer-owners { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .fr-footer-owners a { font-size: 11px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-owners a:hover { text-decoration: underline; }
+    .fr-footer-sep { color: var(--nhs-grey4); font-size: 11px; }
+    .fr-footer-credit { font-size: 11px; color: var(--nhs-grey2); display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+    .fr-footer-credit strong { color: var(--nhs-charcoal-mid); font-weight: 500; }
+    .fr-footer-legal { display: flex; justify-content: flex-end; }
+    .fr-footer-legal a { font-size: 11px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-legal a:hover { text-decoration: underline; }
+    .fr-footer-disclaimer { font-size: 10px; color: var(--nhs-grey2); text-align: center; padding-top: 0.5rem; border-top: 1px solid var(--nhs-grey4); margin-top: 0.6rem; }
+
+    @media (max-width: 600px) {
+      .fr-footer-row { grid-template-columns: 1fr; gap: 8px; }
+      .fr-footer-legal { justify-content: flex-start; }
+      .fr-footer-credit { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="fr-header">
+    <a href="index.html" class="fr-logo">feel<span>ready</span></a>
+    <a href="staff.html" class="fr-staff-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Staff resources
+    </a>
+  </header>
+
+  <section class="fr-hero">
+    <p class="fr-eyebrow">NHS Lothian · OAA · RCoA</p>
+    <h1>Pain Relief in Labour and Caesarean Birth</h1>
+    <div class="fr-search-wrap">
+      <div class="fr-search-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="lang-search" placeholder="Search language…" oninput="filterLangs(this.value)" aria-label="Search languages" />
+      </div>
+    </div>
+  </section>
+
+  <main class="fr-body" id="main-content">
+    <p class="fr-section-label" id="section-label">29 languages available</p>
+    <div class="fr-lang-grid" id="lang-grid"></div>
+  </main>
+
+  <footer class="fr-footer">
+    <div class="fr-footer-row">
+      <div class="fr-footer-owners">
+        <a href="https://www.labourpains.org" target="_blank" rel="noopener">OAA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://rcoa.ac.uk" target="_blank" rel="noopener">RCoA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://www.nhslothian.scot" target="_blank" rel="noopener">NHS Lothian</a>
+      </div>
+      <div class="fr-footer-credit">
+        <span>Created by <strong>Dr Katie Turnbull</strong></span>
+        <span>Improving the quality of care for women</span>
+      </div>
+      <div class="fr-footer-legal">
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+    <p class="fr-footer-disclaimer">This site does not own or host any linked content. All materials are the property of their respective authors.</p>
+  </footer>
+
+  <script>
+    const languages = [
+      { name: "English",    native: "English",       slug: "english",    flag: "🇬🇧" },
+      { name: "Albanian",   native: "Shqip",          slug: "albanian",   flag: "🇦🇱" },
+      { name: "Arabic",     native: "العربية",         slug: "arabic",     flag: "🇸🇦" },
+      { name: "Bengali",    native: "বাংলা",           slug: "bengali",    flag: "🇧🇩" },
+      { name: "Bulgarian",  native: "Български",       slug: "bulgarian",  flag: "🇧🇬" },
+      { name: "Chinese",    native: "中文",             slug: "chinese",    flag: "🇨🇳" },
+      { name: "Farsi",      native: "فارسی",           slug: "farsi",      flag: "🇮🇷" },
+      { name: "French",     native: "Français",        slug: "french",     flag: "🇫🇷" },
+      { name: "German",     native: "Deutsch",         slug: "german",     flag: "🇩🇪" },
+      { name: "Gujarati",   native: "ગુજરાતી",         slug: "gujarati",   flag: "🇮🇳" },
+      { name: "Hebrew",     native: "עברית",           slug: "hebrew",     flag: "🇮🇱" },
+      { name: "Irish",      native: "Gaeilge",         slug: "irish",      flag: "🇮🇪" },
+      { name: "Italian",    native: "Italiano",        slug: "italian",    flag: "🇮🇹" },
+      { name: "Kurdish",    native: "Kurdî",           slug: "kurdish",    flag: "🇮🇶" },
+      { name: "Lithuanian", native: "Lietuvių",        slug: "lithuanian", flag: "🇱🇹" },
+      { name: "Polish",     native: "Polski",          slug: "polish",     flag: "🇵🇱" },
+      { name: "Portuguese", native: "Português",       slug: "portuguese", flag: "🇵🇹" },
+      { name: "Punjabi",    native: "ਪੰਜਾਬੀ",          slug: "punjabi",    flag: "🇮🇳" },
+      { name: "Romanian",   native: "Română",          slug: "romanian",   flag: "🇷🇴" },
+      { name: "Russian",    native: "Русский",         slug: "russian",    flag: "🇷🇺" },
+      { name: "Slovenian",  native: "Slovenščina",     slug: "slovenian",  flag: "🇸🇮" },
+      { name: "Somali",     native: "Soomaali",        slug: "somali",     flag: "🇸🇴" },
+      { name: "Spanish",    native: "Español",         slug: "spanish",    flag: "🇪🇸" },
+      { name: "Tagalog",    native: "Tagalog",         slug: "tagalog",    flag: "🇵🇭" },
+      { name: "Tamil",      native: "தமிழ்",           slug: "tamil",      flag: "🇱🇰" },
+      { name: "Tigrinya",   native: "ትግርኛ",           slug: "tigrinya",   flag: "🇪🇷" },
+      { name: "Turkish",    native: "Türkçe",          slug: "turkish",    flag: "🇹🇷" },
+      { name: "Urdu",       native: "اردو",            slug: "urdu",       flag: "🇵🇰" },
+      { name: "Welsh",      native: "Cymraeg",         slug: "welsh",      flag: "🏴󠁧󠁢󠁷󠁬󠁳󠁿" },
+    ];
+    function renderLangs(list) {
+      const grid = document.getElementById('lang-grid');
+      const label = document.getElementById('section-label');
+      grid.innerHTML = '';
+      label.textContent = list.length === languages.length ? '29 languages available' : list.length + ' language' + (list.length !== 1 ? 's' : '') + ' found';
+      list.forEach(lang => {
+        const a = document.createElement('a');
+        a.href = lang.slug + '.html';
+        a.className = 'fr-lang-card';
+        a.innerHTML = '<span class="fr-lang-flag" aria-hidden="true">' + lang.flag + '</span><div><div class="fr-lang-native">' + lang.native + '</div><div class="fr-lang-name">' + lang.name + '</div></div>';
+        grid.appendChild(a);
+      });
+    }
+    function filterLangs(query) {
+      const q = query.toLowerCase().trim();
+      if (!q) { renderLangs(languages); return; }
+      renderLangs(languages.filter(l => l.name.toLowerCase().includes(q) || l.native.toLowerCase().includes(q)));
+    }
+    renderLangs(languages);
+  </script>
+</body>
+</html>

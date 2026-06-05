@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>Pain Relief Options — English — Feel Ready</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --nhs-blue: #005EB8;
+      --nhs-blue-soft: #4A9FD4;
+      --nhs-blue-light: #D5E8F5;
+      --nhs-blue-pale: #EBF4FB;
+      --nhs-charcoal: #2C3E50;
+      --nhs-charcoal-mid: #4A5568;
+      --nhs-grey2: #768692;
+      --nhs-grey3: #A0ADB5;
+      --nhs-grey4: #D8DDE0;
+      --nhs-grey5: #F8FAFB;
+    }
+    body { font-family: 'DM Sans', sans-serif; color: var(--nhs-charcoal); background: var(--nhs-grey5); min-height: 100vh; }
+
+    .fr-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.75rem; background: var(--nhs-blue); height: 60px;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .fr-logo { font-size: 20px; font-weight: 500; color: white; text-decoration: none; }
+    .fr-logo span { color: #9BD4F5; }
+    .fr-back-btn {
+      font-size: 13px; color: white; opacity: 0.85;
+      border: 1px solid rgba(255,255,255,0.35); background: none; padding: 6px 14px;
+      border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.15s, background 0.15s;
+    }
+    .fr-back-btn:hover { opacity: 1; background: rgba(255,255,255,0.12); }
+
+    .fr-hero {
+      background: var(--nhs-blue-pale);
+      border-bottom: 1px solid var(--nhs-blue-light);
+      padding: 1.75rem 1.75rem 1.5rem;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .fr-flag { font-size: 36px; line-height: 1; }
+    .fr-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--nhs-blue-soft); margin-bottom: 0.3rem; }
+    .fr-hero h1 { font-size: 24px; font-weight: 500; color: var(--nhs-charcoal); }
+
+    .fr-body { padding: 1.25rem 1.25rem 2rem; }
+    .fr-section { margin-bottom: 1.75rem; }
+    .fr-section-title {
+      font-size: 18px; font-weight: 500; color: var(--nhs-charcoal);
+      margin-bottom: 0.75rem; padding-bottom: 0.6rem;
+      border-bottom: 1.5px solid var(--nhs-grey4);
+    }
+
+    .fr-doc-card {
+      background: white; border: 1px solid var(--nhs-grey4);
+      border-radius: 4px; padding: 14px 16px; margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .fr-doc-left { display: flex; align-items: center; gap: 12px; }
+    .fr-doc-icon {
+      width: 38px; height: 38px; border-radius: 4px;
+      background: var(--nhs-blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .fr-doc-icon svg { color: var(--nhs-blue-soft); }
+    .fr-doc-name { font-size: 14px; font-weight: 500; color: var(--nhs-charcoal); }
+    .fr-doc-source { font-size: 12px; color: var(--nhs-grey2); margin-top: 2px; }
+    .fr-doc-btn {
+      font-size: 12px; color: var(--nhs-blue); border: 1px solid var(--nhs-blue-light);
+      background: none; padding: 6px 12px; border-radius: 4px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+      font-weight: 500; white-space: nowrap; flex-shrink: 0; transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .fr-doc-btn:hover { background: var(--nhs-blue); color: white; border-color: var(--nhs-blue); }
+
+    /* Vimeo embed grid */
+    .fr-video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .fr-video-card { background: white; border: 1px solid var(--nhs-grey4); border-radius: 4px; overflow: hidden; }
+    .fr-video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+    .fr-video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .fr-video-title { font-size: 13px; font-weight: 500; color: var(--nhs-charcoal); padding: 10px 13px 11px; }
+
+    .fr-footer { background: white; border-top: 1px solid var(--nhs-grey4); padding: 0.9rem 1.75rem; }
+    .fr-footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
+    .fr-footer-owners { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .fr-footer-owners a { font-size: 11px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-owners a:hover { text-decoration: underline; }
+    .fr-footer-sep { color: var(--nhs-grey4); font-size: 11px; }
+    .fr-footer-credit { font-size: 11px; color: var(--nhs-grey2); display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+    .fr-footer-credit strong { color: var(--nhs-charcoal-mid); font-weight: 500; }
+    .fr-footer-legal { display: flex; justify-content: flex-end; }
+    .fr-footer-legal a { font-size: 11px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-legal a:hover { text-decoration: underline; }
+    .fr-footer-disclaimer { font-size: 10px; color: var(--nhs-grey2); text-align: center; padding-top: 0.5rem; border-top: 1px solid var(--nhs-grey4); margin-top: 0.6rem; }
+
+    @media (max-width: 600px) {
+      .fr-footer-row { grid-template-columns: 1fr; gap: 8px; }
+      .fr-footer-legal { justify-content: flex-start; }
+      .fr-footer-credit { align-items: flex-start; }
+      .fr-doc-card { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="fr-header">
+    <a href="index.html" class="fr-logo">feel<span>ready</span></a>
+    <a href="index.html" class="fr-back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      All languages
+    </a>
+  </header>
+
+  <div class="fr-hero">
+    <span class="fr-flag" aria-hidden="true">🇬🇧</span>
+    <div>
+      <p class="fr-eyebrow">Pain relief options</p>
+      <h1 id="main-content">English</h1>
+    </div>
+  </div>
+
+  <main class="fr-body">
+
+    <section class="fr-section">
+      <h2 class="fr-section-title">Information leaflets</h2>
+
+      <div class="fr-doc-card">
+        <div class="fr-doc-left">
+          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div><div class="fr-doc-name">Pain Relief Comparison Card</div><div class="fr-doc-source">OAA · LabourPains</div></div>
+        </div>
+        <a class="fr-doc-btn" href="https://www.labourpains.org/downloads/english-resources/pain-relief-comparison-card-september-2014.pdf" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Open PDF
+        </a>
+      </div>
+
+      <div class="fr-doc-card">
+        <div class="fr-doc-left">
+          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div><div class="fr-doc-name">Epidural Information Leaflet</div><div class="fr-doc-source">RCoA · 2025</div></div>
+        </div>
+        <a class="fr-doc-btn" href="https://rcoa.ac.uk/sites/default/files/documents/2025-11/Epidural-infographics2025.pdf" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Open PDF
+        </a>
+      </div>
+
+      <div class="fr-doc-card">
+        <div class="fr-doc-left">
+          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div><div class="fr-doc-name">Caesarean Section Information Sheet</div><div class="fr-doc-source">OAA · LabourPains</div></div>
+        </div>
+        <a class="fr-doc-btn" href="https://www.labourpains.org/downloads/english-resources/Labour-Pains-Caesarean-Section-Information-sheet-EN.pdf" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Open PDF
+        </a>
+      </div>
+
+      <div class="fr-doc-card">
+        <div class="fr-doc-left">
+          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div><div class="fr-doc-name">Recovery from Spinal or Epidural</div><div class="fr-doc-source">OAA · LabourPains</div></div>
+        </div>
+        <a class="fr-doc-btn" href="https://www.labourpains.org/downloads/english-resources/recovery-from-spinal-or-epidural-copy.pdf" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Open PDF
+        </a>
+      </div>
+    </section>
+
+    <section class="fr-section">
+      <h2 class="fr-section-title">Videos — NHS Lothian</h2>
+      <div class="fr-video-grid">
+
+        <div class="fr-video-card">
+          <div class="fr-video-embed">
+            <iframe src="https://player.vimeo.com/video/894203096?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Anaesthesia for Birth"></iframe>
+          </div>
+          <div class="fr-video-title">Anaesthesia for Birth</div>
+        </div>
+
+        <div class="fr-video-card">
+          <div class="fr-video-embed">
+            <iframe src="https://player.vimeo.com/video/894202939?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Epidural for Birth"></iframe>
+          </div>
+          <div class="fr-video-title">Epidural for Birth</div>
+        </div>
+
+        <div class="fr-video-card">
+          <div class="fr-video-embed">
+            <iframe src="https://player.vimeo.com/video/894202732?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Spinal Anaesthetic for Birth"></iframe>
+          </div>
+          <div class="fr-video-title">Spinal Anaesthetic for Birth</div>
+        </div>
+
+        <div class="fr-video-card">
+          <div class="fr-video-embed">
+            <iframe src="https://player.vimeo.com/video/894203409?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="General Anaesthesia for Birth"></iframe>
+          </div>
+          <div class="fr-video-title">General Anaesthesia for Birth</div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="fr-footer">
+    <div class="fr-footer-row">
+      <div class="fr-footer-owners">
+        <a href="https://www.labourpains.org" target="_blank" rel="noopener">OAA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://rcoa.ac.uk" target="_blank" rel="noopener">RCoA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://www.nhslothian.scot" target="_blank" rel="noopener">NHS Lothian</a>
+      </div>
+      <div class="fr-footer-credit">
+        <span>Created by <strong>Dr Katie Turnbull</strong></span>
+        <span>Improving the quality of care for women</span>
+      </div>
+      <div class="fr-footer-legal">
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+    <p class="fr-footer-disclaimer">This site does not own or host any linked content. All materials are the property of their respective authors.</p>
+  </footer>
+</body>
+</html>
