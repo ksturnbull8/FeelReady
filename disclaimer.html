@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>Disclaimer — Feel Ready</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --nhs-blue: #005EB8;
+      --nhs-blue-soft: #4A9FD4;
+      --nhs-blue-light: #D5E8F5;
+      --nhs-blue-pale: #EBF4FB;
+      --nhs-charcoal: #2C3E50;
+      --nhs-charcoal-mid: #4A5568;
+      --nhs-grey2: #768692;
+      --nhs-grey3: #A0ADB5;
+      --nhs-grey4: #D8DDE0;
+      --nhs-grey5: #F8FAFB;
+    }
+    body { font-family: 'DM Sans', sans-serif; color: var(--nhs-charcoal); background: var(--nhs-grey5); min-height: 100vh; }
+
+    .fr-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.75rem; background: var(--nhs-blue); height: 60px;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .fr-logo { font-size: 20px; font-weight: 500; color: white; text-decoration: none; }
+    .fr-logo span { color: #9BD4F5; }
+    .fr-back-btn {
+      font-size: 13px; color: white; opacity: 0.85;
+      border: 1px solid rgba(255,255,255,0.35); background: none; padding: 6px 14px;
+      border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.15s, background 0.15s;
+    }
+    .fr-back-btn:hover { opacity: 1; background: rgba(255,255,255,0.12); }
+
+    .fr-hero {
+      background: var(--nhs-blue-pale);
+      border-bottom: 1px solid var(--nhs-blue-light);
+      padding: 2rem 1.75rem 1.75rem;
+    }
+    .fr-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--nhs-blue-soft); margin-bottom: 0.4rem; }
+    .fr-hero h1 { font-size: 28px; font-weight: 500; color: var(--nhs-charcoal); }
+
+    .fr-body { padding: 1.75rem 1.75rem 3rem; max-width: 740px; }
+
+    .fr-section { margin-bottom: 2rem; }
+    .fr-section h2 {
+      font-size: 17px; font-weight: 500; color: var(--nhs-charcoal);
+      margin-bottom: 0.6rem; padding-bottom: 0.5rem;
+      border-bottom: 1.5px solid var(--nhs-grey4);
+    }
+    .fr-section p {
+      font-size: 14px; line-height: 1.75; color: var(--nhs-charcoal-mid);
+      margin-bottom: 0.75rem;
+    }
+    .fr-section p:last-child { margin-bottom: 0; }
+    .fr-section a { color: var(--nhs-blue); text-decoration: underline; }
+    .fr-section a:hover { opacity: 0.8; }
+
+    .fr-intro {
+      font-size: 15px; line-height: 1.75; color: var(--nhs-charcoal-mid);
+      margin-bottom: 2rem; padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--nhs-grey4);
+    }
+
+    .fr-footer { background: white; border-top: 1px solid var(--nhs-grey4); padding: 0.75rem 1.75rem; }
+    .fr-footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
+    .fr-footer-owners { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .fr-footer-owners a { font-size: 11px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-owners a:hover { text-decoration: underline; }
+    .fr-footer-sep { color: var(--nhs-grey4); font-size: 11px; }
+    .fr-footer-credit { font-size: 11px; color: var(--nhs-grey2); display: flex; flex-direction: column; align-items: center; gap: 1px; text-align: center; }
+    .fr-footer-credit strong { color: var(--nhs-charcoal-mid); font-weight: 500; }
+    .fr-footer-legal { display: flex; justify-content: flex-end; }
+    .fr-footer-legal a { font-size: 11px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-legal a:hover { text-decoration: underline; }
+    .fr-footer-disclaimer { font-size: 10px; color: var(--nhs-grey2); text-align: center; padding-top: 0.5rem; border-top: 1px solid var(--nhs-grey4); margin-top: 0.6rem; }
+
+    @media (max-width: 600px) {
+      .fr-footer-row { grid-template-columns: 1fr; gap: 8px; }
+      .fr-footer-legal { justify-content: flex-start; }
+      .fr-footer-credit { align-items: flex-start; }
+      .fr-body { padding: 1.25rem 1.25rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="fr-header">
+    <a href="index.html" class="fr-logo">feel<span>ready</span></a>
+    <a href="index.html" class="fr-back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      Home
+    </a>
+  </header>
+
+  <div class="fr-hero">
+    <p class="fr-eyebrow">Legal</p>
+    <h1 id="main-content">Disclaimer</h1>
+  </div>
+
+  <main class="fr-body">
+
+    <p class="fr-intro">
+      This website provides information about pain relief options in labour and caesarean birth. It has been created by Dr Katie Turnbull to improve the quality of care for women.
+    </p>
+
+    <section class="fr-section">
+      <h2>Content ownership</h2>
+      <p>The original source materials on which this site's content is based are the property of their respective authors: the <a href="https://www.labourpains.org" target="_blank" rel="noopener">OAA</a>, <a href="https://rcoa.ac.uk" target="_blank" rel="noopener">RCoA</a>, and <a href="https://www.nhslothian.scot" target="_blank" rel="noopener">NHS Lothian</a>. The translated text, audio recordings, and adapted versions hosted on this site have been produced specifically for this project to improve accessibility.</p>
+    </section>
+
+    <section class="fr-section">
+      <h2>Translations</h2>
+      <p>The text and audio translations on this site have been produced using automated digital translation and speech synthesis tools. They have not been independently verified by certified medical translators or professional interpreters.</p>
+      <p>While care has been taken to ensure accuracy, automated translation of medical information carries an inherent risk of error, omission, or misinterpretation. These translations are provided as an aid to understanding and should not be treated as a substitute for professional medical interpretation.</p>
+      <p>If you are unsure about any of the information on this site, please ask your healthcare team to arrange a professional interpreter.</p>
+    </section>
+
+    <section class="fr-section">
+      <h2>Help us improve</h2>
+      <p>We welcome feedback on translation accuracy. If you are a member of staff and notice any errors or misleading content in any language, please inform the site administrators so it can be reviewed and corrected.</p>
+      <p>If you are a patient and are unsure about any information on this site, please speak with your midwife, anaesthetist, or healthcare team, who can arrange a professional interpreter.</p>
+    </section>
+
+    <section class="fr-section">
+      <h2>General information only</h2>
+      <p>The information on this site is intended as general guidance about pain relief options. It does not replace individualised clinical advice. All decisions about pain relief should be discussed with your anaesthetist or healthcare team.</p>
+    </section>
+
+    <section class="fr-section">
+      <h2>Liability</h2>
+      <p>Dr Katie Turnbull and the contributors to this site accept no liability for any errors, omissions, or misunderstandings arising from the use of automated translations or the general information provided. Use of this site is at the reader's own discretion.</p>
+    </section>
+
+  </main>
+
+  <footer class="fr-footer">
+    <div class="fr-footer-row">
+      <div class="fr-footer-owners">
+        <a href="https://www.labourpains.org" target="_blank" rel="noopener">OAA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://rcoa.ac.uk" target="_blank" rel="noopener">RCoA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://www.nhslothian.scot" target="_blank" rel="noopener">NHS Lothian</a>
+      </div>
+      <div class="fr-footer-credit">
+        <span>Created by <strong>Dr Katie Turnbull</strong></span>
+        <span>Improving the quality of care for women</span>
+      </div>
+      <div class="fr-footer-legal">
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+    <p class="fr-footer-disclaimer">This site does not own or host any linked content. All materials are the property of their respective authors.</p>
+  </footer>
+
+</body>
+</html>
