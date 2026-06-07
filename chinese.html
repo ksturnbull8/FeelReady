@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://player.vimeo.com/api/player.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -39,14 +40,31 @@
     .fr-doc-source { font-size: 12px; color: var(--nhs-grey3); margin-top: 2px; }
     .fr-doc-btn { font-size: 12px; color: var(--nhs-blue); border: 1px solid var(--nhs-blue-light); background: none; padding: 6px 12px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; font-weight: 500; white-space: nowrap; flex-shrink: 0; transition: background 0.15s, color 0.15s, border-color 0.15s; }
     .fr-doc-btn:hover { background: var(--nhs-blue); color: white; border-color: var(--nhs-blue); }
-    .fr-video-link-card { background: white; border: 1px solid var(--nhs-grey4); border-radius: 4px; padding: 20px; display: flex; align-items: center; gap: 16px; }
-    .fr-video-link-icon { width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; background: var(--nhs-blue-pale); display: flex; align-items: center; justify-content: center; }
-    .fr-video-link-icon svg { color: var(--nhs-blue-soft); }
-    .fr-video-link-title { font-size: 15px; font-weight: 500; color: var(--nhs-charcoal); margin-bottom: 3px; }
-    .fr-video-link-title span { font-size: 12px; font-weight: 400; color: var(--nhs-grey2); font-style: italic; }
-    .fr-video-link-desc { font-size: 13px; color: var(--nhs-grey2); margin-bottom: 12px; line-height: 1.5; }
-    .fr-video-link-btn { font-size: 13px; color: white; background: var(--nhs-blue); padding: 8px 16px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; transition: opacity 0.15s; }
-    .fr-video-link-btn:hover { opacity: 0.88; }
+    .fr-video-list { display: flex; flex-direction: column; gap: 12px; }
+    .fr-video-item { background: white; border: 1px solid var(--nhs-grey4); border-radius: 6px; overflow: hidden; cursor: pointer; transition: border-color 0.15s; }
+    .fr-video-item:hover { border-color: var(--nhs-blue-soft); }
+    .fr-video-item.active { border-color: var(--nhs-blue); }
+    .fr-video-header { display: flex; align-items: center; gap: 14px; padding: 14px 16px; }
+    .fr-video-play-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--nhs-blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s; }
+    .fr-video-item.active .fr-video-play-icon { background: var(--nhs-blue); }
+    .fr-video-play-icon svg { color: var(--nhs-blue-soft); }
+    .fr-video-item.active .fr-video-play-icon svg { color: white; }
+    .fr-video-title-native { font-size: 14px; font-weight: 500; color: var(--nhs-charcoal); }
+    .fr-video-title-en { font-size: 11px; color: var(--nhs-grey2); font-style: italic; margin-top: 2px; }
+    .fr-video-chevron { margin-left: auto; color: var(--nhs-grey3); transition: transform 0.2s; flex-shrink: 0; }
+    .fr-video-item.active .fr-video-chevron { transform: rotate(90deg); color: var(--nhs-blue); }
+    .fr-player-wrap { display: none; }
+    .fr-video-item.active .fr-player-wrap { display: block; }
+    .fr-iframe-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; }
+    .fr-iframe-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .fr-subtitle-bar { background: #1e2d3d; padding: 10px 24px; min-height: 56px; display: flex; align-items: center; justify-content: center; }
+    .fr-subtitle-text { font-size: 14px; line-height: 1.45; color: white; text-align: center; max-width: 100%; text-shadow: 0 1px 3px rgba(0,0,0,0.5); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .fr-subtitle-text.empty { color: rgba(255,255,255,0.3); font-size: 12px; font-style: italic; -webkit-line-clamp: 1; }
+    .fr-subtitle-controls { display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: white; border-top: 1px solid var(--nhs-grey4); flex-wrap: wrap; }
+    .fr-subtitle-label { font-size: 12px; color: var(--nhs-grey2); margin-right: 4px; }
+    .fr-lang-btn { font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--nhs-grey4); background: white; color: var(--nhs-charcoal); cursor: pointer; transition: all 0.15s; }
+    .fr-lang-btn.active { background: var(--nhs-blue); color: white; border-color: var(--nhs-blue); }
+    .fr-lang-btn:hover:not(.active) { border-color: var(--nhs-blue-soft); color: var(--nhs-blue); }
     .fr-footer { background: white; border-top: 1px solid var(--nhs-grey4); padding: 0.75rem 1.75rem; }
     .fr-footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
     .fr-footer-owners { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -64,16 +82,16 @@
       .fr-footer-legal { justify-content: flex-start; }
       .fr-footer-credit { align-items: flex-start; }
       .fr-doc-card { flex-direction: column; align-items: flex-start; }
-      .fr-video-link-card { flex-direction: column; align-items: flex-start; }
+      .fr-subtitle-text { font-size: 13px; }
     }
-  </style>
+</style>
 </head>
 <body>
+
   <header class="fr-header">
     <a href="index.html" class="fr-logo">feel<span>ready</span></a>
     <a href="index.html" class="fr-back-btn">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-      All languages
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg> All languages
     </a>
   </header>
 
@@ -89,9 +107,10 @@
 
     <section class="fr-section">
       <h2 class="fr-section-title">止痛选择 <span>· Information leaflets</span></h2>
-            <div class="fr-doc-card">
+      
+      <div class="fr-doc-card">
         <div class="fr-doc-left">
-          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
           <div>
             <div class="fr-doc-name">镇痛方式比较卡</div>
             <div class="fr-doc-name-en">Pain Relief Comparison Card</div>
@@ -99,13 +118,12 @@
           </div>
         </div>
         <a class="fr-doc-btn" href="https://www.labourpains.org/downloads/translated-content/chinese-(simplified)/pain-relief-comparison-card-september-2014---chinese.pdf" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          打开原文 · Open PDF
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 打开原文 · Open PDF
         </a>
       </div>
       <div class="fr-doc-card">
         <div class="fr-doc-left">
-          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
           <div>
             <div class="fr-doc-name">硬膜外麻醉信息卡</div>
             <div class="fr-doc-name-en">Epidural Information Card</div>
@@ -113,13 +131,12 @@
           </div>
         </div>
         <a class="fr-doc-btn" href="https://www.labourpains.org/downloads/translated-content/chinese-(simplified)/epiduralinformationcard-chinese.pdf" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          打开原文 · Open PDF
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 打开原文 · Open PDF
         </a>
       </div>
       <div class="fr-doc-card">
         <div class="fr-doc-left">
-          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
           <div>
             <div class="fr-doc-name">分娩镇痛常见问题</div>
             <div class="fr-doc-name-en">Pain Relief FAQs</div>
@@ -127,13 +144,12 @@
           </div>
         </div>
         <a class="fr-doc-btn" href="https://www.labourpains.org/downloads/translated-content/chinese-(simplified)/faqs-for-pain-relief-in-labour-2015---chinese.pdf" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          打开原文 · Open PDF
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 打开原文 · Open PDF
         </a>
       </div>
       <div class="fr-doc-card">
         <div class="fr-doc-left">
-          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
           <div>
             <div class="fr-doc-name">剖宫产麻醉常见问题</div>
             <div class="fr-doc-name-en">Anaesthetic for Caesarean Section FAQs</div>
@@ -141,28 +157,14 @@
           </div>
         </div>
         <a class="fr-doc-btn" href="https://www.labourpains.org/downloads/translated-content/chinese-(simplified)/faqs-your-anaesthetic-for-caesarean-section---chinese---complete.pdf" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          打开原文 · Open PDF
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 打开原文 · Open PDF
         </a>
       </div>
-
     </section>
 
     <section class="fr-section">
       <h2 class="fr-section-title">视频（NHS洛锡安） <span>· Videos</span></h2>
-      <div class="fr-video-link-card">
-        <div class="fr-video-link-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-        <div>
-          <div class="fr-video-link-title">视频（NHS洛锡安） <span>· Pain relief videos</span></div>
-          <div class="fr-video-link-desc">4个视频，配有中文配音 — 中文版本。<br>4 videos with Chinese dubbed audio.</div>
-          <a class="fr-video-link-btn" href="https://feelready.co.uk/chinese/" target="_blank" rel="noopener">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            观看视频 · Watch videos
-          </a>
-        </div>
-      </div>
+      <div class="fr-video-list" id="video-list"></div>
     </section>
 
   </main>
@@ -186,5 +188,100 @@
     </div>
     <p class="fr-footer-disclaimer">This site does not own or host any linked content. All materials are the property of their respective authors.</p>
   </footer>
+
+  <script>
+    
+    const VIDEOS = [{"slug": "anaesthesia", "vimeo": "894203096", "native": "分娩麻醉", "en": "Anaesthesia for Birth"}, {"slug": "epidural", "vimeo": "894202939", "native": "分娩硬膜外麻醉", "en": "Epidural for Birth"}, {"slug": "spinal", "vimeo": "894202732", "native": "分娩脊髓麻醉", "en": "Spinal Anaesthetic for Birth"}, {"slug": "general", "vimeo": "894203409", "native": "分娩全身麻醉", "en": "General Anaesthesia for Birth"}];
+    const SUBTITLES = {"anaesthesia": [{"s": 0.0, "e": 13.0, "en": "NHS Lothian have made a series of videos to provide you with useful information and to show you what to expect if you have an anaesthetic during or after the birth of your baby.", "tr": "NHS洛锡安制作了一系列视频，为您提供有用的信息，并向您展示如果您在宝宝出生期间或之后接受麻醉，您可以期待什么。"}, {"s": 13.0, "e": 18.0, "en": "This video is to help you know what to expect in the operating theatre.", "tr": "本视频旨在帮助您了解在手术室中可以期待什么。"}, {"s": 18.0, "e": 26.0, "en": "There are other videos on this webpage which further describe the different types of anaesthetic.", "tr": "本网页上还有其他视频，进一步描述了不同类型的麻醉方式。"}, {"s": 27.0, "e": 41.0, "en": "It’s not unusual for women and birthing people to have a surgical procedure, which may be planned or unplanned, for the safe birth of their baby or soon after the birth.", "tr": "对于女性和分娩者来说，为了宝宝的安全出生或出生后不久，进行计划内或计划外的手术并不罕见。"}, {"s": 41.0, "e": 57.0, "en": "If this applies to you, you will have an anaesthetic. This will either be a spinal or epidural anaesthetic, which allows you to remain awake, or a general anaesthetic, which means that you’re fully asleep.", "tr": "如果这适用于您，您将接受麻醉。这可能是脊髓麻醉或硬膜外麻醉，让您保持清醒；也可能是全身麻醉，这意味着您会完全入睡。"}, {"s": 57.0, "e": 72.0, "en": "If you’re having a planned caesarean, you will normally be offered a spinal anaesthetic, where you will remain awake. Occasionally it might be necessary for you to have a general anaesthetic.", "tr": "如果您计划进行剖宫产，通常会为您提供脊髓麻醉，您将保持清醒。偶尔您可能需要全身麻醉。"}, {"s": 72.0, "e": 84.0, "en": "You may have a natural birth and then require a procedure after the birth, such as repairing a tear or removing the placenta, or to stop bleeding.", "tr": "您可能经历了自然分娩，然后需要在分娩后进行手术，例如修补撕裂伤、取出胎盘或止血。"}, {"s": 85.0, "e": 92.0, "en": "You may need some assistance with forceps or a ventouse to help your baby to be born safely.", "tr": "您可能需要使用产钳或吸引器来帮助您的宝宝安全出生。"}, {"s": 94.0, "e": 105.0, "en": "You may have an unplanned caesarean to deliver your baby safely. Most of these procedures can be done with a spinal or epidural, which allows you to stay awake.", "tr": "您可能需要进行紧急剖宫产以安全地分娩您的宝宝。大多数此类手术可以使用脊髓或硬膜外麻醉完成，让您保持清醒。"}, {"s": 106.0, "e": 116.0, "en": "Some women cannot safely have a spinal or epidural, or may choose not to. In this case, you will be offered a general anaesthetic.", "tr": "有些女性由于安全原因无法接受脊髓或硬膜外麻醉，或者选择不接受。在这种情况下，您将被提供全身麻醉。"}, {"s": 117.0, "e": 129.0, "en": "If you’re having your baby in the operating theatre, or if you require a procedure after the birth, then you will most likely be awake with a spinal or epidural.", "tr": "如果您在手术室分娩，或者在分娩后需要进行手术，那么您很可能在脊髓或硬膜外麻醉下保持清醒。"}, {"s": 130.0, "e": 140.0, "en": "Once the spinal injection has been done, or while the epidural is being topped up with stronger medicine, there will be lots of things happening.", "tr": "一旦脊髓注射完成，或者在硬膜外麻醉用更强的药物加强期间，会有很多事情同时发生。"}, {"s": 141.0, "e": 148.0, "en": "If you’re in theatre for the birth of your baby, then your midwife will stay with you to keep checking how your baby is doing.", "tr": "如果您在手术室等待宝宝出生，您的助产士会一直陪伴您，持续检查宝宝的状况。"}, {"s": 149.0, "e": 158.0, "en": "If you’re having a caesarean, compression boots will be put on your legs, and a catheter will be put into your bladder by your midwife.", "tr": "如果您要进行剖宫产，会在您的腿上套上压力靴，助产士会为您放置导尿管。"}, {"s": 159.0, "e": 169.0, "en": "The anaesthetist will carefully check that the anaesthetic is working by asking you to move your legs and spraying you with cold spray.", "tr": "麻醉医生会仔细检查麻醉是否起效，会要求您活动双腿，并用冷喷雾测试您的感觉。"}, {"s": 170.0, "e": 176.0, "en": "The anaesthetist will ensure everything is working well before surgery starts.", "tr": "麻醉医生会确保一切正常后才开始手术。"}, {"s": 177.0, "e": 187.0, "en": "The medical team will ask you to place your arms and legs in a special position which may feel strange, but it’s very important for the procedure.", "tr": "医疗团队会要求您将手臂和双腿放在特定位置，这可能感觉奇怪，但这对手术非常重要。"}, {"s": 188.0, "e": 196.0, "en": "If you’re having a caesarean, your arms will be out on boards, or one may be more comfortably supported across your partner.", "tr": "如果您要进行剖宫产，您的手臂会放在支撑板上，或者一只手臂可以更舒适地放在您的伴侣身上。"}, {"s": 197.0, "e": 202.0, "en": "Straight arms help the monitors and fluids work well.", "tr": "手臂伸直有助于监测设备和输液管正常工作。"}, {"s": 203.0, "e": 211.0, "en": "If you’re having a forceps or procedure after birth, then the position is different, and we need to raise your legs up.", "tr": "如果您要使用产钳或在分娩后进行手术，体位会有所不同，我们需要将您的双腿抬高。"}, {"s": 212.0, "e": 217.0, "en": "The team looking after you in theatre will help you to do this.", "tr": "在手术室照顾您的团队会帮助您完成这个动作。"}, {"s": 218.0, "e": 224.0, "en": "If you are there for the birth, then your birth partner will still be very close to you for support.", "tr": "如果您在手术室等待宝宝出生，您的陪产伴侣仍然会在您身边给予支持。"}, {"s": 225.0, "e": 234.0, "en": "During a caesarean section there will be a screen in place. The surgical drapes will go on just before the surgery starts.", "tr": "剖宫产期间会放置一块遮挡屏。手术开始前会铺上手术帘。"}, {"s": 235.0, "e": 240.0, "en": "Once the anaesthetic is ready, the team will introduce themselves and do a final safety check.", "tr": "麻醉准备好后，团队会自我介绍并进行最后的安全检查。"}, {"s": 241.0, "e": 248.0, "en": "It will feel strange as you are lying down. It’s hard to see and there are a lot of people in the room.", "tr": "躺下时会感觉奇怪。很难看清周围，而且房间里有很多人。"}, {"s": 249.0, "e": 252.0, "en": "They are all there to keep you safe and comfortable.", "tr": "他们都在那里保障您的安全和舒适。"}, {"s": 253.0, "e": 259.0, "en": "Your anaesthetic team will be close by all the time and can answer any questions.", "tr": "您的麻醉团队会一直在您身边，可以回答您的任何问题。"}, {"s": 260.0, "e": 267.0, "en": "You can bring your own music to play, you can use the music available or have it just quiet if you prefer.", "tr": "您可以带自己的音乐播放，使用现有的音乐，或者如果您愿意也可以保持安静。"}, {"s": 268.0, "e": 273.0, "en": "Bring a camera so your partner can take photos of you and your baby.", "tr": "带上相机，这样您的伴侣可以给您和宝宝拍照。"}, {"s": 274.0, "e": 280.0, "en": "Big surgical drapes will go over your lower body to keep the surgical site sterile.", "tr": "大块手术帘会覆盖您的下半身，以保持手术区域无菌。"}, {"s": 281.0, "e": 286.0, "en": "It’s common to feel sick, lightheaded or shivery during the anaesthesia.", "tr": "在麻醉期间感到恶心、头晕或发抖是常见的。"}, {"s": 286.0, "e": 291.0, "en": "Please let the anaesthetist know as there are often things that we can do to help.", "tr": "请告知麻醉医生，因为我们通常可以采取措施帮助您。"}, {"s": 292.0, "e": 301.0, "en": "Shivering can feel unpleasant but please be reassured it is a normal side effect of spinal and epidurals and will settle down.", "tr": "发抖可能会让您感到不适，但请放心，这是脊髓和硬膜外麻醉的正常副作用，很快就会消退。"}, {"s": 303.0, "e": 311.0, "en": "Feeling touch, pressure, pulling and pushing are common and normal during surgery with spinal and epidurals.", "tr": "在脊髓和硬膜外麻醉下进行手术时，感到触摸、压力、拉扯和推动是常见且正常的。"}, {"s": 312.0, "e": 321.0, "en": "You should not feel pain. Your anaesthetist will want to know immediately if you are uncomfortable and will do all they can to help.", "tr": "您不应该感到疼痛。如果您感到不适，您的麻醉医生会希望立即知道，并会尽一切努力帮助您。"}, {"s": 322.0, "e": 325.0, "en": "In some cases you may need a general anaesthetic.", "tr": "在某些情况下，您可能需要全身麻醉。"}, {"s": 326.0, "e": 337.0, "en": "If you are having forceps or a caesarean then once your baby is born the team will usually allow one minute before clamping the umbilical cord.", "tr": "如果您使用产钳分娩或进行剖宫产，宝宝出生后团队通常会等待一分钟再夹住脐带。"}, {"s": 337.0, "e": 340.0, "en": "This is called delayed cord clamping.", "tr": "这叫做延迟脐带夹闭。"}, {"s": 342.0, "e": 345.0, "en": "We will show you your baby as soon as possible.", "tr": "我们会尽快让您看到您的宝宝。"}, {"s": 346.0, "e": 351.0, "en": "Once the cord is cut the midwife will usually bring your baby straight to meet you.", "tr": "脐带剪断后，助产士通常会立即把宝宝带到您身边。"}, {"s": 353.0, "e": 363.0, "en": "Then your midwife will take your baby to the resuscitaire, a special area inside the theatre to keep them warm and dry and do the first checks.", "tr": "然后您的助产士会把宝宝带到复苏台——手术室内的一个专门区域，为宝宝保暖、擦干并进行首次检查。"}, {"s": 364.0, "e": 368.0, "en": "Your birth partner can usually stay near your baby at this stage.", "tr": "此时您的陪产伴侣通常可以留在宝宝身边。"}, {"s": 369.0, "e": 375.0, "en": "Usually if it was a planned caesarean the resuscitaire is in theatre just behind your shoulder.", "tr": "通常如果是计划剖宫产，复苏台就在手术室内您肩膀后方。"}, {"s": 376.0, "e": 384.0, "en": "Due to its position you will not be able to see much but your midwife will bring your baby back to you as soon as possible.", "tr": "由于位置原因，您可能看不太清楚，但助产士会尽快把宝宝带回您身边。"}, {"s": 385.0, "e": 392.0, "en": "The emergency theatre does not have a resuscitaire and your midwife will take your baby a very short distance to the baby room.", "tr": "紧急手术室没有复苏台，助产士会把宝宝带到很近的婴儿室。"}, {"s": 393.0, "e": 399.0, "en": "Again your birth partner can usually go with your baby. This room is very close by.", "tr": "您的陪产伴侣通常也可以跟随宝宝去那里。这个房间就在附近。"}, {"s": 400.0, "e": 409.0, "en": "If the neonatal team need to take care of your baby after the birth they are always close by and will attend immediately.", "tr": "如果新生儿团队需要在宝宝出生后对其进行护理，他们始终在附近，会立即到场。"}, {"s": 411.0, "e": 418.0, "en": "Once your baby is dry and has had the first checks your midwife will usually be able to bring your baby to you.", "tr": "宝宝擦干并完成首次检查后，助产士通常可以把宝宝带到您身边。"}, {"s": 418.0, "e": 425.0, "en": "You may wish your birth partner to hold your baby or you may wish to hold your baby skin to skin in theatre.", "tr": "您可以让您的陪产伴侣抱着宝宝，也可以选择在手术室里与宝宝进行肌肤接触。"}, {"s": 426.0, "e": 436.0, "en": "This is recommended and supported. The staff will be happy to help you get your baby comfortably in skin to skin with you.", "tr": "这是被推荐和支持的做法。工作人员很乐意帮助您舒适地与宝宝进行肌肤接触。"}, {"s": 437.0, "e": 446.0, "en": "Once the procedure is complete we do a final team check and then we transfer you back into your bed and take you out to the recovery area.", "tr": "手术完成后，我们会进行最后的团队检查，然后将您转移回病床上，带您去恢复区。"}, {"s": 446.0, "e": 453.0, "en": "This video was created to help prepare you for what you may experience if you do need to visit the operating theatre.", "tr": "制作这段视频是为了帮助您做好准备，以应对您可能需要进入手术室的情况。"}, {"s": 454.0, "e": 463.0, "en": "If you would like more information about the different types of anaesthetics you can find videos about these on this webpage.", "tr": "如果您想了解更多关于不同类型麻醉的信息，可以在本网页找到相关视频。"}], "epidural": [{"s": 0.0, "e": 13.0, "en": "NHS Lothian have made a series of videos to provide you with useful information and to show you what to expect if you have an anaesthetic during or after the birth of your baby.", "tr": "NHS洛锡安制作了一系列视频，为您提供有用的信息，并向您展示如果您在宝宝出生期间或之后接受麻醉，您可以期待什么。"}, {"s": 13.0, "e": 25.7, "en": "This short video will provide you with information about what to expect if you have an epidural and need to have a procedure in theatre during or after the birth of your baby.", "tr": "这段简短的视频将为您提供信息，帮助您了解如果您有硬膜外麻醉并且需要在宝宝出生期间或之后在手术室进行手术，您可以期待什么。"}, {"s": 25.7, "e": 32.0, "en": "This video is to help you know what to expect in the operating theatre. There are other videos on the NHS Lothian webpage which further describe the different types of anaesthetic.", "tr": "本视频旨在帮助您了解在手术室中可以期待什么。NHS洛锡安网页上还有其他视频，进一步描述了不同类型的麻醉方式。"}, {"s": 32.0, "e": 45.5, "en": "You may have chosen to have an epidural during your labour and then require an unplanned procedure in theatre. This could be because you need some assistance with forceps or a caesarean section for the safe birth of your baby, to repair a tear or to help to remove a placenta after the birth.", "tr": "您可能在分娩过程中选择了硬膜外麻醉，然后需要在手术室进行紧急手术。这可能是因为您需要产钳或剖宫产帮助宝宝安全出生、修补撕裂伤或帮助分娩后取出胎盘。"}, {"s": 45.5, "e": 58.6, "en": "Your midwife and obstetrician will explain this in detail. If your epidural has worked well for labour then usually it can be topped up with stronger medicine to turn it into an anaesthetic for a surgical procedure.", "tr": "您的助产士和产科医生会详细向您解释。如果您的硬膜外麻醉在分娩期间效果良好，通常可以用更强的药物加强，使其成为手术麻醉。"}, {"s": 58.6, "e": 70.5, "en": "This is called an epidural top-up or epidural block. The benefit of an epidural top-up is that you can be awake for your procedure but do not need any further injections into your back as you would with a spinal anaesthetic.", "tr": "这被称为硬膜外追加或硬膜外阻滞。硬膜外追加的好处是您可以在手术中保持清醒，而且不需要像脊髓麻醉那样再在背部注射。"}, {"s": 70.5, "e": 81.3, "en": "The anaesthetist will give you stronger epidural medicine which can usually be started while in your room in labour ward and your midwife and anaesthetist will take you to theatre.", "tr": "麻醉医生会给您更强的硬膜外药物，通常可以在您待产房间内就开始给药，然后助产士和麻醉医生会带您去手术室。"}, {"s": 81.3, "e": 97.2, "en": "Your partner will be able to come with you and they will be shown where to get changed. There are risks from epidurals which your anaesthetist will have discussed before the epidural was put in and there is a separate video which covers this in more detail.", "tr": "您的伴侣可以陪您一起去，工作人员会告诉他们在哪里更换手术服。硬膜外有一定的风险，您的麻醉医生在放置硬膜外之前已经与您讨论过，另外还有一段单独的视频更详细地介绍了这些内容。"}, {"s": 97.2, "e": 108.5, "en": "The anaesthetist will come and see you to discuss what will happen when they take you to theatre. They will explain that it is normal to feel touch, pressure and pulling during a procedure with an epidural block.", "tr": "麻醉医生会来看您，与您讨论带您去手术室后会发生什么。他们会解释，在硬膜外阻滞下进行手术时，感到触摸、压力和拉扯是正常的。"}, {"s": 108.5, "e": 125.6, "en": "It is never normal to feel pain and if you do please let the anaesthetist know. Risks of epidural top-up include it not working well enough and you feeling pain. If the epidural does not seem to be working well then the anaesthetist may offer you a spinal anaesthetic instead.", "tr": "感到疼痛是不正常的，如果您感到疼痛，请告知麻醉医生。硬膜外追加的风险包括效果不够好以及您感到疼痛。如果硬膜外似乎效果不佳，麻醉医生可能会为您提供脊髓麻醉作为替代。"}, {"s": 125.6, "e": 138.0, "en": "There is a separate video about spinal anaesthetics. There is a small risk of feeling pain during surgery with an epidural block. This is uncommon but may require you to have a general anaesthetic.", "tr": "关于脊髓麻醉有一段单独的视频。硬膜外阻滞下手术时有轻微的疼痛风险。这种情况不常见，但可能需要您接受全身麻醉。"}, {"s": 138.0, "e": 158.9, "en": "When you arrive in theatre there will be a full team of staff present and it may seem like a lot of people but they are all there to look after you and make you comfortable. Your legs will start to become heavy and the staff will help you transfer onto the table.", "tr": "当您到达手术室时，会有一整个团队的工作人员在场，可能看起来人很多，但他们都在那里照顾您，让您感到舒适。您的双腿会开始变得沉重，工作人员会帮助您转移到手术台上。"}, {"s": 158.9, "e": 182.0, "en": "If you are in theatre to have your baby then the midwife will check baby is okay and the staff will tilt the table to the side so that you are not lying completely flat. This is to help stop your blood pressure from dropping too low. It can feel strange. The staff will put supports in place so that you are secure. Your blood pressure will be checked frequently.", "tr": "如果您在手术室等待宝宝出生，助产士会检查宝宝是否安好，工作人员会将手术台倾斜到一侧，这样您就不会完全平躺。这是为了防止您的血压降得过低。这可能会感觉奇怪。工作人员会放置支撑物确保您安全。您的血压会被频繁检查。"}, {"s": 182.0, "e": 192.8, "en": "The staff will put in place monitors to check that you and your baby are doing well during the procedure and perform a safety checklist.", "tr": "工作人员会安装监测设备，检查您和宝宝在手术期间的状况，并完成安全检查清单。"}, {"s": 192.8, "e": 207.0, "en": "The anaesthetist will be carefully monitoring the epidural top up is working by asking you to move your legs and spraying your body with a cold spray. The medical team will ensure the epidural block is working before they start and keep checking you’re okay during the procedure.", "tr": "麻醉医生会仔细监测硬膜外追加是否起效，会要求您活动双腿，并用冷喷雾测试您的身体。医疗团队会确保硬膜外阻滞起效后才开始手术，并在手术过程中持续检查您是否舒适。"}, {"s": 207.0, "e": 225.5, "en": "You may start feeling sick at this point or flushed and shivery. These experiences are quite normal but do let the anaesthetist know and they will do what they can to help you feel better.", "tr": "此时您可能开始感到恶心、面部发热或发抖。这些感受是很正常的，但请告知麻醉医生，他们会尽力帮助您感觉好一些。"}, {"s": 225.5, "e": 237.8, "en": "This video was created to help prepare you for what you may experience if you need to have a procedure in theatre with an epidural top up. There is another video which describes in more detail what you may experience during your procedure in theatre.", "tr": "制作这段视频是为了帮助您做好准备，以应对您可能需要在硬膜外追加下到手术室进行手术的情况。另外还有一段视频更详细地描述了您在手术室手术期间可能的经历。"}, {"s": 237.8, "e": 253.6, "en": "There are other videos with more details about other types of anaesthetic.", "tr": "还有其他视频提供了关于其他类型麻醉的更多详细信息。"}], "spinal": [{"s": 0.0, "e": 16.4, "en": "NHS Lothian have made a series of videos to provide you with useful information and to show you what to expect if you have an anaesthetic during or after the birth of your baby.", "tr": "NHS洛锡安制作了一系列视频，为您提供有用的信息，并向您展示如果您在宝宝出生期间或之后接受麻醉，您可以期待什么。"}, {"s": 16.4, "e": 29.1, "en": "This short video will provide you with information about what to expect if you have a spinal anaesthetic, also called a spinal block, during or after the birth of your baby.", "tr": "这段简短的视频将为您提供信息，帮助您了解如果您在宝宝出生期间或之后接受脊髓麻醉（也称为脊髓阻滞），您可以期待什么。"}, {"s": 29.1, "e": 41.2, "en": "It’s not unusual for women and birthing people to have a surgical procedure which may be planned or unplanned for the safe birth of their baby or soon after the birth.", "tr": "对于女性和分娩者来说，为了宝宝的安全出生或出生后不久，进行计划内或计划外的手术并不罕见。"}, {"s": 41.2, "e": 52.5, "en": "If you’re having a planned caesarean section you’re most likely to be offered a spinal anaesthetic which allows you to stay awake.", "tr": "如果您计划进行剖宫产，最有可能为您提供脊髓麻醉，让您保持清醒。"}, {"s": 52.5, "e": 63.8, "en": "If you have an unplanned caesarean section and do not already have an epidural in place you will usually be offered a spinal anaesthetic.", "tr": "如果您进行紧急剖宫产且尚未放置硬膜外导管，通常会为您提供脊髓麻醉。"}, {"s": 63.8, "e": 75.3, "en": "After the birth of your baby if you have a tear that needs to be repaired or if your placenta has not come out you may also be offered a spinal anaesthetic.", "tr": "在宝宝出生后，如果您有需要修补的撕裂伤或者胎盘未排出，也可能为您提供脊髓麻醉。"}, {"s": 75.3, "e": 92.9, "en": "There are many benefits of a spinal block over a general anaesthetic, which is where you are asleep. If the procedure is for the birth then most people prefer to be awake for this and your partner can also be present. Having a spinal anaesthetic avoids the side effects of general anaesthesia for you and your baby such as feeling sleepy or sick afterwards.", "tr": "与全身麻醉（即让您入睡）相比，脊髓阻滞有许多优势。如果手术是为了分娩，大多数人更愿意保持清醒，您的伴侣也可以陪在身边。脊髓麻醉可以避免全身麻醉对您和宝宝的副作用，例如术后嗜睡或恶心。"}, {"s": 92.9, "e": 111.1, "en": "There are also rare but serious complications of general anaesthesia such as problems with the lungs and breathing. Rarely it’s not safe to have a spinal anaesthetic, for example if you’re bleeding heavily or you’ve been taking blood thinning medicine. If you cannot have a spinal then you’ll be offered a general anaesthetic instead.", "tr": "全身麻醉还有罕见但严重的并发症，如肺部和呼吸问题。在极少数情况下，接受脊髓麻醉是不安全的，例如您正在大量出血或正在服用抗凝血药物。如果您无法接受脊髓麻醉，将为您提供全身麻醉。"}, {"s": 111.1, "e": 127.1, "en": "There are risks of spinal anaesthesia which your anaesthetist will discuss in detail when you meet them. They include it not working well enough and you feeling pain during surgery. This is uncommon but may require you to have a general anaesthetic.", "tr": "脊髓麻醉有一定的风险，您的麻醉医生在见到您时会详细讨论。风险包括效果不够好以及在手术中感到疼痛。这种情况不常见，但可能需要您接受全身麻醉。"}, {"s": 127.1, "e": 147.6, "en": "Rarely, about 1 in 300 cases, women can get a bad headache after a spinal anaesthetic. This can go away in a few days with normal painkillers but sometimes requires further treatment. Very rarely, about 1 in 1,000 spinals, damage to a nerve can cause a numb patch on your leg or a weak leg. This is usually temporary.", "tr": "在罕见的情况下，大约三百分之一，女性在脊髓麻醉后可能会出现严重头痛。这可能在几天内通过普通止痛药缓解，但有时需要进一步治疗。极少数情况下，大约一千次脊髓麻醉中有一次，神经损伤可能导致腿部麻木或无力。这通常是暂时的。"}, {"s": 147.6, "e": 169.3, "en": "Long-term nerve damage is much rarer at approximately 1 in 13,000 spinals. Extremely rare is the risk of bleeding or developing an infection within the back. Many people worry that they may have backache because of a spinal anaesthetic. Backache itself is very common during pregnancy and often continues after the birth of your baby but this is very unlikely to have been caused by the spinal.", "tr": "长期神经损伤更为罕见，大约一万三千次脊髓麻醉中有一次。极其罕见的风险包括背部出血或感染。许多人担心脊髓麻醉会导致背痛。背痛在怀孕期间非常常见，通常在宝宝出生后仍会持续，但这不太可能是由脊髓麻醉引起的。"}, {"s": 169.3, "e": 191.4, "en": "Your partner can come with you to theatre for the birth of your baby or procedures after your birth. The team will show them where to get changed for this. If it’s a planned caesarean you will be able to walk to theatre. If the procedure is unplanned you’ll be taken on your bed and the staff will help you transfer.", "tr": "您的伴侣可以陪您去手术室参加宝宝的出生或产后手术。团队会告诉他们在哪里更换手术服。如果是计划剖宫产，您可以步行去手术室。如果是紧急手术，您将躺在病床上被推过去，工作人员会帮助您转移。"}, {"s": 191.4, "e": 214.8, "en": "When you arrive in theatre before the procedure the team will go through a checklist and introduce themselves. If you don’t already have one, a cannula will be put in place in a vein in your hand or arm and we will get ready to monitor you and your baby’s well-being. You will usually be sitting up for the spinal anaesthetic to be put in place.", "tr": "当您到达手术室后，在手术开始前，团队会核对清单并自我介绍。如果您还没有，会在您的手背或手臂的静脉中放置一根留置针，我们会准备好监测您和宝宝的健康状况。放置脊髓麻醉时您通常是坐着的。"}, {"s": 214.8, "e": 235.7, "en": "You’ll be asked to put your chin onto your chest, to relax your shoulders down, to curl up and push your lower back out. This is to open up the spaces between the bones in your back and helps make it quicker to place the spinal. We will clean your back with an antiseptic solution and place a sterile drape over your back.", "tr": "您会被要求把下巴收向胸口，放松肩膀，弓起身体，将下背部向外推。这是为了打开背部脊椎骨之间的间隙，有助于更快地放置脊髓针。我们会用消毒液清洁您的背部，并在您的背上铺上一块无菌手术巾。"}, {"s": 235.7, "e": 259.2, "en": "Next we will inject some local anaesthetic to numb up the area. This might sting a little for a short time however after this you should only feel the sensation of pressure. Sometimes you may feel a strange sensation in your back or down one leg. Don’t worry if this happens, just let the anaesthetist know.", "tr": "接下来我们会注射一些局部麻醉药来麻木该区域。这可能会短暂地有些刺痛，但之后您应该只会感到压力感。有时您可能会在背部或一条腿上感到奇怪的感觉。如果发生这种情况不用担心，只需告知麻醉医生。"}, {"s": 259.2, "e": 275.7, "en": "Once the spinal injection has been done it’s normal for your legs and your bottom to quickly feel warm and tingly. The team will assist you to lie down quickly. It will feel that there’s a lot of things happening.", "tr": "脊髓注射完成后，您的双腿和臀部会很快感到温暖和刺麻，这是正常的。团队会帮助您迅速躺下。您会感觉有很多事情在同时发生。"}, {"s": 275.7, "e": 297.2, "en": "If you’re in theatre to have your baby the midwife will check your baby as well and the table will be tilted to the side so that you’re not lying completely flat. This is to help stop your blood pressure from dropping too low. It can feel strange. The team will put supports in place so that you’re secure. Your blood pressure will be checked frequently.", "tr": "如果您在手术室等待宝宝出生，助产士也会检查宝宝的情况，手术台会倾斜到一侧，这样您就不会完全平躺。这是为了防止您的血压降得过低。这可能会感觉奇怪。团队会放置支撑物确保您安全。您的血压会被频繁检查。"}, {"s": 297.2, "e": 318.7, "en": "You may start to feel a bit sick at this point or feel flushed and shivery. These experiences are quite normal but do let the anaesthetist know and they will do what they can to help you feel better. The anaesthetist will ensure the spinal block is working fully before the procedure starts and will keep checking you’re okay throughout the procedure.", "tr": "此时您可能会开始感到有些恶心、面部发热或发抖。这些感受是很正常的，但请告知麻醉医生，他们会尽力帮助您感觉好一些。麻醉医生会确保脊髓阻滞完全起效后才开始手术，并在整个手术过程中持续检查您是否舒适。"}, {"s": 318.7, "e": 371.5, "en": "This video was created to help prepare you for what you might experience if you have a spinal anaesthetic. There’s another video which describes in more detail what you may experience during your procedure in theatre. There are other videos with more details about other types of anaesthetic.", "tr": "制作这段视频是为了帮助您做好准备，以应对您可能需要接受脊髓麻醉的情况。另外还有一段视频更详细地描述了您在手术室手术期间可能的经历。还有其他视频提供了关于其他类型麻醉的更多详细信息。"}], "general": [{"s": 0.0, "e": 16.3, "en": "NHS Lothian have made a series of videos to provide you with useful information and to show you what to expect if you have an anaesthetic during or after the birth of your baby.", "tr": "NHS洛锡安制作了一系列视频，为您提供有用的信息，并向您展示如果您在宝宝出生期间或之后接受麻醉，您可以期待什么。"}, {"s": 16.3, "e": 29.8, "en": "This short video will provide you with information about what to expect if you have a general anaesthetic, where you are asleep, for a procedure in theatre during or after the birth of your baby.", "tr": "这段简短的视频将为您提供信息，帮助您了解如果您在宝宝出生期间或之后需要在手术室接受全身麻醉（即让您入睡），您可以期待什么。"}, {"s": 29.8, "e": 52.6, "en": "While most women who have a surgical procedure for birth or after birth are able to stay awake with a spinal or epidural, between five and ten out of a hundred women will have a general anaesthetic either for the birth of their baby or for a procedure after birth such as stopping heavy bleeding.", "tr": "虽然大多数进行分娩或产后手术的女性可以在脊髓或硬膜外麻醉下保持清醒，但每一百名女性中有五到十名会接受全身麻醉，用于宝宝的出生或产后手术，例如止住大量出血。"}, {"s": 52.6, "e": 68.0, "en": "If the general anaesthetic is part of a planned procedure then you will have had the opportunity to meet the anaesthetist and talk about it in detail beforehand. However, most general anaesthetics needed around the time of birth are not planned.", "tr": "如果全身麻醉是计划手术的一部分，您将有机会提前见到麻醉医生并详细讨论。然而，分娩前后所需的大多数全身麻醉都不是计划好的。"}, {"s": 68.0, "e": 79.4, "en": "They may be needed to be done at very short notice and in what might seem like a rush because of concerns for the health of yourself or your baby.", "tr": "由于对您或宝宝健康的担忧，可能需要在很短的时间内进行，看起来可能像是很匆忙。"}, {"s": 79.4, "e": 95.0, "en": "We hope this video will help prepare you by showing you what to expect if you’re having a planned general anaesthetic and also help you to feel more safe if you find yourself unexpectedly needing to go off to sleep for the birth or soon after the birth of your baby.", "tr": "我们希望这段视频能帮助您做好准备，向您展示计划全身麻醉时会发生什么，也帮助您在意外需要为分娩或产后入睡时感到更加安心。"}, {"s": 95.0, "e": 106.9, "en": "Planned caesarean sections are usually with a spinal anaesthetic but some women cannot have a spinal anaesthetic for medical reasons or through choice.", "tr": "计划剖宫产通常使用脊髓麻醉，但由于医学原因或个人选择，有些女性无法接受脊髓麻醉。"}, {"s": 106.9, "e": 125.2, "en": "For unplanned procedures there are various reasons why a spinal or epidural is not possible and a general is needed. These include some medical conditions, heavy bleeding or situations where the baby needs to be delivered too quickly for other options to be possible.", "tr": "对于紧急手术，有多种原因使得脊髓或硬膜外麻醉不可行而需要全身麻醉。这些原因包括某些疾病、大量出血，或宝宝需要尽快分娩以至于没有时间使用其他方式。"}, {"s": 125.2, "e": 143.0, "en": "Occasionally there are times when the spinal or epidural did not work well enough or the anaesthetist was not able to insert it and a general anaesthetic is then required. Though it is unusual, unfortunately a spinal or epidural may occasionally not work enough during the procedure.", "tr": "偶尔会出现脊髓或硬膜外麻醉效果不够好，或麻醉医生无法成功放置的情况，此时就需要全身麻醉。虽然这种情况不常见，但遗憾的是，脊髓或硬膜外麻醉有时可能在手术过程中效果不足。"}, {"s": 143.0, "e": 165.6, "en": "If you are uncomfortable during surgery your anaesthetist will listen to your concerns and to what you’re experiencing. They may be able to resolve the discomfort quickly with simple treatments however you may need a general anaesthetic instead. If you need a general anaesthetic in theatre for any reason the team will keep you safe.", "tr": "如果您在手术中感到不适，麻醉医生会倾听您的担忧和感受。他们可能能通过简单的治疗迅速解决不适，但您可能需要全身麻醉。无论出于何种原因需要在手术室接受全身麻醉，团队都会确保您的安全。"}, {"s": 165.6, "e": 185.4, "en": "There are additional checklists and monitoring required. We understand this may be frightening especially if you’ve not had much warning. The team will talk you through all the steps. Because of the increased chance of vomiting when you’re pregnant you’ll be given an antacid drink.", "tr": "需要进行额外的核查和监测。我们理解这可能令人害怕，特别是如果您事先没有得到太多预警。团队会向您逐步解释所有步骤。由于怀孕期间呕吐的可能性增加，会给您一杯抗酸饮料。"}, {"s": 185.4, "e": 201.4, "en": "The position you are in and the preparations are all very important. Because you’ll be asleep your partner will not be able to stay with you in theatre. The staff will escort them to the waiting area. If your baby has been born then usually they will stay with your partner.", "tr": "您的体位和准备工作都非常重要。因为您会入睡，您的伴侣无法在手术室陪伴您。工作人员会送他们到等候区。如果宝宝已经出生，通常宝宝会留在您的伴侣身边。"}, {"s": 201.4, "e": 221.0, "en": "We will give you oxygen to breathe before you go off to sleep. The mask has a plastic smell however will only have oxygen in it. It will take a few minutes to fill your lungs with oxygen and get everything ready to safely start the general anaesthetic.", "tr": "在您入睡之前，我们会给您吸入氧气。面罩可能有塑料气味，但里面只有氧气。用氧气充满您的肺部并做好安全开始全身麻醉的一切准备需要几分钟时间。"}, {"s": 221.0, "e": 240.1, "en": "The medicine to get you off to sleep goes into the cannula in your arm. It can feel cold and a little uncomfortable. We will stay with you and keep you safe until the procedure is complete and we wake you up again.", "tr": "让您入睡的药物通过手臂上的留置针注入。可能会感到冰凉和稍有不适。我们会一直陪伴您，确保您的安全，直到手术完成并将您唤醒。"}, {"s": 240.1, "e": 259.1, "en": "There are some risks associated with general anaesthesia. In case of an unplanned procedure it may be that there is not enough time to discuss these risks with you in detail so we will cover them now. It’s common to feel sleepy and sick after a general.", "tr": "全身麻醉有一些相关风险。如果是紧急手术，可能没有足够的时间与您详细讨论这些风险，所以我们现在来介绍。全身麻醉后感到嗜睡和恶心是常见的。"}, {"s": 259.1, "e": 279.1, "en": "If you’ve had a caesarean section you may be sore and you’ll be given painkillers like morphine to help with the pain. You may have a morphine pump with a button to press when you’re sore and this is called a PCA.", "tr": "如果您做了剖宫产，您可能会感到疼痛，会给您如吗啡等止痛药来帮助缓解。您可能会有一个吗啡泵，上面有一个按钮，在您疼痛时可以按下，这叫做PCA（患者自控镇痛）。"}, {"s": 279.1, "e": 303.1, "en": "It’s common to have a sore throat for a few days after a general anaesthetic. This is due to mild irritation caused by a breathing tube. Small cuts to the lips or tongue are also common but will heal quickly. Dental damage including chipped teeth, while rare, is a risk of general anaesthesia.", "tr": "全身麻醉后几天内喉咙痛是常见的。这是由于呼吸管轻度刺激引起的。嘴唇或舌头上的小伤口也很常见，但会很快愈合。牙齿损伤如牙齿碎裂虽然罕见，但也是全身麻醉的一个风险。"}, {"s": 303.1, "e": 329.6, "en": "Very serious problems such as difficulty placing the breathing tube causing reduced oxygen levels in your body is a very rare complication of general anaesthesia. Remembering the procedure or feeling pain during surgery when you’re having a general anaesthetic are also extremely rare complications.", "tr": "非常严重的问题，例如放置呼吸管困难导致体内氧气水平降低，是全身麻醉非常罕见的并发症。在全身麻醉时记住手术过程或感到疼痛也是极其罕见的并发症。"}, {"s": 329.6, "e": 354.7, "en": "The staff are highly trained and take all precautions to ensure your safety during general anaesthesia. You’ll be seen afterwards by an anaesthetist to discuss your experience, to ask any questions or raise any concerns that you may have.", "tr": "工作人员经过专业训练，会采取一切预防措施确保您在全身麻醉期间的安全。术后会有一名麻醉医生来看望您，讨论您的经历，回答您的问题或听取您可能有的任何担忧。"}, {"s": 354.7, "e": 387.5, "en": "This video was designed to help prepare you for what you may experience if you have a general anaesthetic for the birth or after the birth of your baby. There are other videos with more details about other types of anaesthetic and about what happens in theatre.", "tr": "这段视频旨在帮助您做好准备，以应对您可能在宝宝出生时或出生后需要接受全身麻醉的情况。还有其他视频提供了关于其他类型麻醉以及手术室内情况的更多详细信息。"}]};
+    const LANG_NATIVE = '中文';
+    const LANG_LABEL = '字幕';
+
+    let currentLang = "tr";
+    let players = {};
+    let subtitleIntervals = {};
+
+    function buildVideoList() {
+      const list = document.getElementById("video-list");
+      VIDEOS.forEach((vid) => {
+        const item = document.createElement("div");
+        item.className = "fr-video-item";
+        item.id = "item-" + vid.slug;
+        item.innerHTML = `
+          <div class="fr-video-header" onclick="toggleVideo('${vid.slug}')">
+            <div class="fr-video-play-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            <div>
+              <div class="fr-video-title-native">${vid.native}</div>
+              <div class="fr-video-title-en">${vid.en}</div>
+            </div>
+            <div class="fr-video-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="fr-player-wrap" id="player-wrap-${vid.slug}">
+            <div class="fr-iframe-wrap"><div id="vimeo-${vid.slug}"></div></div>
+            <div class="fr-subtitle-bar" id="subtitle-bar-${vid.slug}">
+              <div class="fr-subtitle-text empty" id="subtitle-text-${vid.slug}">— subtitles will appear here —</div>
+            </div>
+            <div class="fr-subtitle-controls">
+              <span class="fr-subtitle-label">${LANG_LABEL}:</span>
+              <button class="fr-lang-btn active" onclick="setLang('tr','${vid.slug}')">${LANG_NATIVE}</button>
+              <button class="fr-lang-btn" onclick="setLang('en','${vid.slug}')">English</button>
+              <button class="fr-lang-btn" onclick="setLang('off','${vid.slug}')">Off</button>
+            </div>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function toggleVideo(slug) {
+      const item = document.getElementById("item-" + slug);
+      const isActive = item.classList.contains("active");
+      document.querySelectorAll(".fr-video-item").forEach(el => el.classList.remove("active"));
+      Object.values(subtitleIntervals).forEach(id => clearInterval(id));
+      if (!isActive) {
+        item.classList.add("active");
+        if (!players[slug]) {
+          const vid = VIDEOS.find(v => v.slug === slug);
+          const player = new Vimeo.Player("vimeo-" + slug, { id: vid.vimeo, responsive: true, title: false, byline: false, portrait: false });
+          players[slug] = player;
+          player.ready().then(() => startSubtitles(slug));
+        } else {
+          startSubtitles(slug);
+        }
+      } else {
+        if (players[slug]) players[slug].pause();
+      }
+    }
+
+    function startSubtitles(slug) {
+      const player = players[slug];
+      const cues = SUBTITLES[slug] || [];
+      const textEl = document.getElementById("subtitle-text-" + slug);
+      if (subtitleIntervals[slug]) clearInterval(subtitleIntervals[slug]);
+      subtitleIntervals[slug] = setInterval(() => {
+        player.getCurrentTime().then(t => {
+          if (currentLang === "off") { textEl.textContent = ""; textEl.className = "fr-subtitle-text empty"; return; }
+          const cue = cues.find(c => t >= c.s && t < c.e);
+          if (cue) {
+            textEl.textContent = currentLang === "tr" ? cue.tr : cue.en;
+            textEl.className = "fr-subtitle-text";
+          } else {
+            textEl.textContent = "";
+            textEl.className = "fr-subtitle-text empty";
+          }
+        }).catch(() => {});
+      }, 150);
+    }
+
+    function setLang(lang, slug) {
+      currentLang = lang;
+      const wrap = document.getElementById("player-wrap-" + slug);
+      wrap.querySelectorAll(".fr-lang-btn").forEach(btn => btn.classList.remove("active"));
+      const idx = {"tr": 0, "en": 1, "off": 2};
+      wrap.querySelectorAll(".fr-lang-btn")[idx[lang]].classList.add("active");
+    }
+
+    buildVideoList();
+
+  </script>
 </body>
 </html>
