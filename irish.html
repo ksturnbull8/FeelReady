@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ga">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>Roghanna faoiseamh péine — Gaeilge — Feel Ready</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --nhs-blue: #005EB8; --nhs-blue-soft: #4A9FD4; --nhs-blue-light: #D5E8F5;
+      --nhs-blue-pale: #EBF4FB; --nhs-charcoal: #2C3E50; --nhs-charcoal-mid: #4A5568;
+      --nhs-grey2: #768692; --nhs-grey3: #A0ADB5; --nhs-grey4: #D8DDE0; --nhs-grey5: #F8FAFB;
+    }
+    body { font-family: "DM Sans", sans-serif; color: var(--nhs-charcoal); background: var(--nhs-grey5); min-height: 100vh; }
+    .fr-header { display: flex; align-items: center; justify-content: space-between; padding: 0 1.75rem; background: var(--nhs-blue); height: 60px; position: sticky; top: 0; z-index: 10; }
+    .fr-logo { font-size: 20px; font-weight: 500; color: white; text-decoration: none; }
+    .fr-logo span { color: #9BD4F5; }
+    .fr-back-btn { font-size: 13px; color: white; opacity: 0.85; border: 1px solid rgba(255,255,255,0.35); background: none; padding: 6px 14px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.15s, background 0.15s; }
+    .fr-back-btn:hover { opacity: 1; background: rgba(255,255,255,0.12); }
+    .fr-hero { background: var(--nhs-blue-pale); border-bottom: 1px solid var(--nhs-blue-light); padding: 1.75rem 1.75rem 1.5rem; display: flex; align-items: center; gap: 16px; }
+    .fr-flag { font-size: 36px; line-height: 1; }
+    .fr-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--nhs-blue-soft); margin-bottom: 0.3rem; }
+    .fr-hero h1 { font-size: 24px; font-weight: 500; color: var(--nhs-charcoal); }
+    .fr-hero h1 span { font-size: 16px; font-weight: 400; color: var(--nhs-grey2); }
+    .fr-body { padding: 1.25rem 1.25rem 2rem; }
+    .fr-section { margin-bottom: 1.75rem; }
+    .fr-section-title { font-size: 18px; font-weight: 500; color: var(--nhs-charcoal); margin-bottom: 0.75rem; padding-bottom: 0.6rem; border-bottom: 1.5px solid var(--nhs-grey4); }
+    .fr-section-title span { font-size: 13px; font-weight: 400; color: var(--nhs-grey2); }
+    .fr-doc-card { background: white; border: 1px solid var(--nhs-grey4); border-radius: 4px; padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .fr-doc-left { display: flex; align-items: center; gap: 12px; }
+    .fr-doc-icon { width: 38px; height: 38px; border-radius: 4px; background: var(--nhs-blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .fr-doc-icon svg { color: var(--nhs-blue-soft); }
+    .fr-doc-name { font-size: 14px; font-weight: 500; color: var(--nhs-charcoal); }
+    .fr-doc-name-en { font-size: 11px; color: var(--nhs-grey2); margin-top: 2px; font-style: italic; }
+    .fr-doc-source { font-size: 12px; color: var(--nhs-grey3); margin-top: 2px; }
+    .fr-doc-btn { font-size: 12px; color: var(--nhs-blue); border: 1px solid var(--nhs-blue-light); background: none; padding: 6px 12px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; font-weight: 500; white-space: nowrap; flex-shrink: 0; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+    .fr-doc-btn:hover { background: var(--nhs-blue); color: white; border-color: var(--nhs-blue); }
+    .fr-video-link-card { background: white; border: 1px solid var(--nhs-grey4); border-radius: 4px; padding: 20px; display: flex; align-items: center; gap: 16px; }
+    .fr-video-link-icon { width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; background: var(--nhs-blue-pale); display: flex; align-items: center; justify-content: center; }
+    .fr-video-link-icon svg { color: var(--nhs-blue-soft); }
+    .fr-video-link-title { font-size: 15px; font-weight: 500; color: var(--nhs-charcoal); margin-bottom: 3px; }
+    .fr-video-link-title span { font-size: 12px; font-weight: 400; color: var(--nhs-grey2); font-style: italic; }
+    .fr-video-link-desc { font-size: 13px; color: var(--nhs-grey2); margin-bottom: 12px; line-height: 1.5; }
+    .fr-video-link-btn { font-size: 13px; color: white; background: var(--nhs-blue); padding: 8px 16px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; transition: opacity 0.15s; }
+    .fr-video-link-btn:hover { opacity: 0.88; }
+    .fr-footer { background: white; border-top: 1px solid var(--nhs-grey4); padding: 0.75rem 1.75rem; }
+    .fr-footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
+    .fr-footer-owners { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .fr-footer-owners a { font-size: 11px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-owners a:hover { text-decoration: underline; }
+    .fr-footer-sep { color: var(--nhs-grey4); font-size: 11px; }
+    .fr-footer-credit { font-size: 11px; color: var(--nhs-grey2); display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+    .fr-footer-credit strong { color: var(--nhs-charcoal-mid); font-weight: 500; }
+    .fr-footer-legal { display: flex; justify-content: flex-end; }
+    .fr-footer-legal a { font-size: 11px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-legal a:hover { text-decoration: underline; }
+    .fr-footer-disclaimer { font-size: 10px; color: var(--nhs-grey2); text-align: center; padding-top: 0.5rem; border-top: 1px solid var(--nhs-grey4); margin-top: 0.6rem; }
+    @media (max-width: 600px) {
+      .fr-footer-row { grid-template-columns: 1fr; gap: 8px; }
+      .fr-footer-legal { justify-content: flex-start; }
+      .fr-footer-credit { align-items: flex-start; }
+      .fr-doc-card { flex-direction: column; align-items: flex-start; }
+      .fr-video-link-card { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="fr-header">
+    <a href="index.html" class="fr-logo">feel<span>ready</span></a>
+    <a href="index.html" class="fr-back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      All languages
+    </a>
+  </header>
+
+  <div class="fr-hero">
+    <span class="fr-flag" aria-hidden="true">🇮🇪</span>
+    <div>
+      <p class="fr-eyebrow">Roghanna faoiseamh péine · Pain relief options</p>
+      <h1 id="main-content">Gaeilge <span>· Irish</span></h1>
+    </div>
+  </div>
+
+  <main class="fr-body">
+
+    <section class="fr-section">
+      <h2 class="fr-section-title">Roghanna faoiseamh péine <span>· Information leaflets</span></h2>
+            <div class="fr-doc-card">
+        <div class="fr-doc-left">
+          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div>
+            <div class="fr-doc-name">CC faoi Fhaoiseamh Péine sa Lucht Saothair</div>
+            <div class="fr-doc-name-en">Pain Relief FAQs</div>
+            <div class="fr-doc-source">OAA · LabourPains</div>
+          </div>
+        </div>
+        <a class="fr-doc-btn" href="https://www.labourpains.org/downloads/translated-content/irish/faqs-pain-relief-in-labour-(irish).pdf" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Oscail an bunleagan · Open PDF
+        </a>
+      </div>
+      <div class="fr-doc-card">
+        <div class="fr-doc-left">
+          <div class="fr-doc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div>
+            <div class="fr-doc-name">Epidurals — a bhfuil a fhios agat</div>
+            <div class="fr-doc-name-en">Epidurals — What You Need to Know</div>
+            <div class="fr-doc-source">OAA · LabourPains</div>
+          </div>
+        </div>
+        <a class="fr-doc-btn" href="https://www.labourpains.org/downloads/translated-content/irish/epidurals---what-you-need-to-know-(irish).pdf" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Oscail an bunleagan · Open PDF
+        </a>
+      </div>
+
+    </section>
+
+    <section class="fr-section">
+      <h2 class="fr-section-title">Físeáin (SSN Lothian) <span>· Videos</span></h2>
+      <div class="fr-video-link-card">
+        <div class="fr-video-link-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div>
+          <div class="fr-video-link-title">Físeáin (SSN Lothian) <span>· Pain relief videos</span></div>
+          <div class="fr-video-link-desc">4 físeán le fuaimrian Gaeilge — Leagan Gaeilge.<br>4 videos with Irish dubbed audio.</div>
+          <a class="fr-video-link-btn" href="https://feelready.co.uk/irish/" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Féach ar na físeáin · Watch videos
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="fr-footer">
+    <div class="fr-footer-row">
+      <div class="fr-footer-owners">
+        <a href="https://www.labourpains.org" target="_blank" rel="noopener">OAA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://rcoa.ac.uk" target="_blank" rel="noopener">RCoA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://www.nhslothian.scot" target="_blank" rel="noopener">NHS Lothian</a>
+      </div>
+      <div class="fr-footer-credit">
+        <span>Created by <strong>Dr Katie Turnbull</strong></span>
+        <span>Improving the quality of care for women</span>
+      </div>
+      <div class="fr-footer-legal">
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+    <p class="fr-footer-disclaimer">This site does not own or host any linked content. All materials are the property of their respective authors.</p>
+  </footer>
+</body>
+</html>
