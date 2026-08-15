@@ -84,7 +84,30 @@
       .fr-footer-credit { align-items: flex-start; }
       .fr-doc-card { flex-direction: column; align-items: flex-start; }
     }
-  </style>
+  
+    /* --- Accessibility: text size, contrast, RTL polish --- */
+    .fr-a11y-bar { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; background: white; border-bottom: 1px solid var(--nhs-grey4); padding: 6px 12px; }
+    .fr-a11y-btn { font-family: 'DM Sans', "DM Sans", sans-serif; font-size: 13px; font-weight: 500; padding: 4px 11px; border-radius: 20px; border: 1px solid var(--nhs-grey4); background: white; color: var(--nhs-charcoal); cursor: pointer; transition: all 0.15s; }
+    .fr-a11y-btn.active { background: var(--nhs-blue); color: white; border-color: var(--nhs-blue); }
+    .fr-a11y-btn:hover:not(.active) { border-color: var(--nhs-blue-soft); color: var(--nhs-blue); }
+    .fr-a11y-sep { width: 1px; height: 18px; background: var(--nhs-grey4); margin: 0 4px; }
+    html.fr-scale-lg body { zoom: 1.15; }
+    html.fr-scale-xl body { zoom: 1.3; }
+    html.fr-contrast {
+      --nhs-blue: #002d5c; --nhs-blue-soft: #002d5c; --nhs-blue-light: #000000;
+      --nhs-blue-pale: #ffffff; --nhs-charcoal: #000000; --nhs-charcoal-mid: #000000;
+      --nhs-grey2: #000000; --nhs-grey3: #000000; --nhs-grey4: #000000; --nhs-grey5: #ffffff;
+    }
+    html.fr-contrast body { background: #ffffff; }
+    html.fr-contrast .fr-doc-card, html.fr-contrast .fr-video-card, html.fr-contrast .fr-video-item,
+    html.fr-contrast .fr-lang-card, html.fr-contrast .fr-resource-card, html.fr-contrast .fr-subtitle-bar,
+    html.fr-contrast .fr-footer, html.fr-contrast .fr-note { border-width: 2px; }
+    html.fr-contrast .fr-subtitle-bar { background: #000000; }
+    [dir="rtl"] .fr-back-btn svg { transform: scaleX(-1); }
+    [dir="rtl"] .fr-video-chevron { transform: scaleX(-1); }
+    [dir="rtl"] .fr-video-item.active .fr-video-chevron { transform: scaleX(-1) rotate(90deg); }
+    .fr-footer-reviewed { font-size: 11px; color: var(--nhs-grey2); text-align: center; margin-top: 0.4rem; }
+</style>
 </head>
 <body>
   <header class="fr-header">
@@ -94,6 +117,14 @@
       All languages
     </a>
   </header>
+  <div class="fr-a11y-bar" role="group" aria-label="Accessibility settings">
+    <button type="button" class="fr-a11y-btn active" id="fr-scale-normal" onclick="frSetScale('normal')">A</button>
+    <button type="button" class="fr-a11y-btn" id="fr-scale-lg" onclick="frSetScale('large')">A+</button>
+    <button type="button" class="fr-a11y-btn" id="fr-scale-xl" onclick="frSetScale('xlarge')">A++</button>
+    <span class="fr-a11y-sep"></span>
+    <button type="button" class="fr-a11y-btn" id="fr-contrast-btn" onclick="frToggleContrast()" aria-pressed="false">High contrast</button>
+  </div>
+
 
   <div class="fr-hero">
     <span class="fr-flag" aria-hidden="true">🇹🇷</span>
@@ -192,6 +223,7 @@
         <a href="disclaimer.html">Disclaimer</a>
       </div>
     </div>
+        <p class="fr-footer-reviewed">Son gözden geçirme: 15 Ağustos 2026</p>
     <p class="fr-footer-disclaimer">This site does not own or host any linked content. All materials are the property of their respective authors.</p>
   </footer>
 
@@ -287,6 +319,35 @@
 
     buildVideoList();
 
+  </script>
+
+  <script>
+    function frApplyScale(v) {
+      document.documentElement.classList.remove('fr-scale-lg', 'fr-scale-xl');
+      document.querySelectorAll('.fr-a11y-btn').forEach(function(b){
+        if (b.id === 'fr-scale-normal' || b.id === 'fr-scale-lg' || b.id === 'fr-scale-xl') b.classList.remove('active');
+      });
+      if (v === 'large') { document.documentElement.classList.add('fr-scale-lg'); var el = document.getElementById('fr-scale-lg'); if (el) el.classList.add('active'); }
+      else if (v === 'xlarge') { document.documentElement.classList.add('fr-scale-xl'); var el2 = document.getElementById('fr-scale-xl'); if (el2) el2.classList.add('active'); }
+      else { var el3 = document.getElementById('fr-scale-normal'); if (el3) el3.classList.add('active'); }
+    }
+    function frSetScale(v) { try { localStorage.setItem('fr-scale', v); } catch (e) {} frApplyScale(v); }
+    function frToggleContrast() {
+      var on = document.documentElement.classList.toggle('fr-contrast');
+      try { localStorage.setItem('fr-contrast', on ? '1' : '0'); } catch (e) {}
+      var btn = document.getElementById('fr-contrast-btn');
+      if (btn) { btn.setAttribute('aria-pressed', on ? 'true' : 'false'); btn.classList.toggle('active', on); }
+    }
+    (function () {
+      var s = null, c = null;
+      try { s = localStorage.getItem('fr-scale'); c = localStorage.getItem('fr-contrast'); } catch (e) {}
+      if (s) frApplyScale(s);
+      if (c === '1') {
+        document.documentElement.classList.add('fr-contrast');
+        var btn = document.getElementById('fr-contrast-btn');
+        if (btn) { btn.setAttribute('aria-pressed', 'true'); btn.classList.add('active'); }
+      }
+    })();
   </script>
 </body>
 </html>
