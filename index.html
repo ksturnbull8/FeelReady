@@ -1,11 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=pain.html">
-<title>Paediatric Pain Management — NHS Lothian</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+  <title>Pain Relief Options in Labour &amp; Caesarean Birth — Feel Ready</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --nhs-blue: #005EB8;
+      --nhs-blue-soft: #4A9FD4;
+      --nhs-blue-light: #D5E8F5;
+      --nhs-blue-pale: #EBF4FB;
+      --nhs-charcoal: #2C3E50;
+      --nhs-charcoal-mid: #4A5568;
+      --nhs-grey2: #768692;
+      --nhs-grey3: #A0ADB5;
+      --nhs-grey4: #D8DDE0;
+      --nhs-grey5: #F8FAFB;
+    }
+    body { font-family: 'DM Sans', sans-serif; color: var(--nhs-charcoal); background: var(--nhs-grey5); min-height: 100vh; }
+
+    .fr-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.75rem; background: var(--nhs-blue); height: 60px;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .fr-logo { font-size: 27px; font-weight: 500; color: white; text-decoration: none; }
+    .fr-logo span { color: #9BD4F5; }
+    .fr-staff-btn {
+      font-size: 17px; color: white; opacity: 0.85;
+      border: 1px solid rgba(255,255,255,0.35); background: none; padding: 6px 14px;
+      border-radius: 4px; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.15s, background 0.15s;
+    }
+    .fr-staff-btn:hover { opacity: 1; background: rgba(255,255,255,0.12); }
+
+    .fr-hero {
+      background: var(--nhs-blue-pale);
+      border-bottom: 1px solid var(--nhs-blue-light);
+      padding: 2.5rem 1.75rem 2rem;
+      text-align: center;
+    }
+    .fr-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--nhs-blue-soft); margin-bottom: 0.5rem; }
+    .fr-hero h1 { font-size: 36px; font-weight: 500; color: var(--nhs-charcoal); margin-bottom: 1.25rem; line-height: 1.3; }
+    .fr-search-wrap { display: flex; justify-content: center; }
+    .fr-search-bar {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; max-width: 420px;
+      border: 1.5px solid var(--nhs-blue-light); border-radius: 4px; padding: 9px 16px;
+      background: white;
+    }
+    .fr-search-bar:focus-within { border-color: var(--nhs-blue-soft); }
+    .fr-search-bar input {
+      border: none; background: none; outline: none;
+      font-family: 'DM Sans', sans-serif; font-size: 20px;
+      color: var(--nhs-charcoal); flex: 1;
+    }
+    .fr-search-bar svg { flex-shrink: 0; color: var(--nhs-grey3); }
+
+    .fr-body { padding: 0 1.25rem 1.5rem; }
+    .fr-section-label {
+      font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--nhs-grey2); padding: 1rem 0.25rem 0.6rem;
+    }
+    .fr-lang-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 8px;
+    }
+    .fr-lang-card {
+      position: relative;
+      display: flex; align-items: center; gap: 10px; padding: 11px 13px;
+      border: 1px solid var(--nhs-grey4);
+      border-radius: 4px; background: white;
+      text-decoration: none; transition: background 0.15s, border-color 0.15s;
+    }
+    .fr-lang-card-suggested { border-color: var(--nhs-blue); border-width: 2px; background: var(--nhs-blue-pale); }
+    .fr-lang-badge { position: absolute; top: -8px; right: 10px; background: var(--nhs-blue); color: white; font-size: 10px; font-weight: 600; letter-spacing: 0.2px; padding: 2px 8px; border-radius: 10px; }
+    .fr-lang-card:hover { background: var(--nhs-blue-pale); border-color: var(--nhs-blue-soft); }
+    .fr-lang-flag { font-size: 30px; line-height: 1; flex-shrink: 0; }
+    .fr-lang-native { font-size: 18px; font-weight: 500; color: var(--nhs-charcoal); line-height: 1.2; }
+    .fr-lang-name { font-size: 13px; color: var(--nhs-grey2); margin-top: 1px; }
+
+    .fr-footer { background: white; border-top: 1px solid var(--nhs-grey4); padding: 0.9rem 1.75rem; }
+    .fr-footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
+    .fr-footer-owners { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .fr-footer-owners img { height: 36px; width: auto; display: block; }
+    .fr-footer-owners a { font-size: 12px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-owners a:hover { text-decoration: underline; }
+    .fr-footer-sep { color: var(--nhs-grey4); font-size: 12px; }
+    .fr-footer-credit { font-size: 12px; color: var(--nhs-grey2); display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+    .fr-footer-credit strong { color: var(--nhs-charcoal-mid); font-weight: 500; }
+    .fr-footer-legal { display: flex; justify-content: flex-end; }
+    .fr-footer-legal a { font-size: 12px; color: var(--nhs-blue); text-decoration: none; }
+    .fr-footer-legal a:hover { text-decoration: underline; }
+    .fr-footer-disclaimer { font-size: 11px; color: var(--nhs-grey2); text-align: center; padding-top: 0.5rem; border-top: 1px solid var(--nhs-grey4); margin-top: 0.6rem; }
+
+    @media (max-width: 600px) {
+      .fr-footer-row { grid-template-columns: 1fr; gap: 8px; }
+      .fr-footer-legal { justify-content: flex-start; }
+      .fr-footer-credit { align-items: flex-start; }
+    }
+  
+    /* --- Accessibility: text size, contrast, RTL polish --- */
+    .fr-a11y-bar { display: flex; align-items: center; justify-content: flex-end; gap: 6px; background: white; border-bottom: 1px solid var(--nhs-grey4); padding: 5px 10px; }
+    .fr-a11y-btn { font-family: 'DM Sans', "DM Sans", sans-serif; font-size: 13px; font-weight: 600; width: 30px; height: 30px; padding: 0; border-radius: 50%; border: 1px solid var(--nhs-grey4); background: white; color: var(--nhs-charcoal); cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; line-height: 1; }
+    .fr-a11y-btn.active { background: var(--nhs-blue); color: white; border-color: var(--nhs-blue); }
+    .fr-a11y-btn:hover:not(.active) { border-color: var(--nhs-blue-soft); color: var(--nhs-blue); }
+    .fr-a11y-btn svg { width: 15px; height: 15px; }
+    .fr-a11y-sep { width: 1px; height: 18px; background: var(--nhs-grey4); margin: 0 2px; flex-shrink: 0; }
+    html.fr-scale-lg body { zoom: 1.15; }
+    html.fr-scale-xl body { zoom: 1.3; }
+    html.fr-contrast {
+      --nhs-blue: #002d5c; --nhs-blue-soft: #002d5c; --nhs-blue-light: #000000;
+      --nhs-blue-pale: #ffffff; --nhs-charcoal: #000000; --nhs-charcoal-mid: #000000;
+      --nhs-grey2: #000000; --nhs-grey3: #000000; --nhs-grey4: #000000; --nhs-grey5: #ffffff;
+    }
+    html.fr-contrast body { background: #ffffff; }
+    html.fr-contrast .fr-doc-card, html.fr-contrast .fr-video-card, html.fr-contrast .fr-video-item,
+    html.fr-contrast .fr-lang-card, html.fr-contrast .fr-resource-card, html.fr-contrast .fr-subtitle-bar,
+    html.fr-contrast .fr-footer, html.fr-contrast .fr-note { border-width: 2px; }
+    html.fr-contrast .fr-subtitle-bar { background: #000000; }
+    [dir="rtl"] .fr-back-btn svg { transform: scaleX(-1); }
+    [dir="rtl"] .fr-video-chevron { transform: scaleX(-1); }
+    [dir="rtl"] .fr-video-item.active .fr-video-chevron { transform: scaleX(-1) rotate(90deg); }
+    .fr-footer-reviewed { font-size: 11px; color: var(--nhs-grey2); text-align: center; margin-top: 0.4rem; }
+</style>
 </head>
 <body>
-<p>Redirecting... <a href="pain.html">Click here if not redirected</a></p>
+  <header class="fr-header">
+    <a href="index.html" class="fr-logo">feel<span>ready</span></a>
+    <a href="staff.html" class="fr-staff-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Staff resources
+    </a>
+  </header>
+  <div class="fr-a11y-bar" role="group" aria-label="Accessibility settings">
+    <button type="button" class="fr-a11y-btn" id="fr-scale-down" onclick="frStepScale(-1)" aria-label="Decrease text size" title="Decrease text size">A&minus;</button>
+    <button type="button" class="fr-a11y-btn" id="fr-scale-up" onclick="frStepScale(1)" aria-label="Increase text size" title="Increase text size">A+</button>
+    <span class="fr-a11y-sep"></span>
+    <button type="button" class="fr-a11y-btn" id="fr-contrast-btn" onclick="frToggleContrast()" aria-pressed="false" aria-label="Toggle high contrast" title="High contrast">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor" stroke="none"/></svg>
+    </button>
+  </div>
+
+
+  <section class="fr-hero">
+    <p class="fr-eyebrow">NHS Lothian · OAA · RCoA</p>
+    <h1>Pain Relief in Labour and Caesarean Birth</h1>
+    <div class="fr-search-wrap">
+      <div class="fr-search-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="lang-search" placeholder="Search language…" oninput="filterLangs(this.value)" aria-label="Search languages" />
+      </div>
+    </div>
+  </section>
+
+  <main class="fr-body" id="main-content">
+    <p class="fr-section-label" id="section-label">20 languages available</p>
+    <div class="fr-lang-grid" id="lang-grid"></div>
+  </main>
+
+  <footer class="fr-footer">
+    <div class="fr-footer-row">
+      <div class="fr-footer-owners">
+        <img src="nhs-lothian-charity-logo.png" alt="NHS Lothian Charity">
+        <span class="fr-footer-sep">·</span>
+        <a href="https://www.labourpains.org" target="_blank" rel="noopener">OAA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://rcoa.ac.uk" target="_blank" rel="noopener">RCoA</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="https://www.nhslothian.scot" target="_blank" rel="noopener">NHS Lothian</a>
+      </div>
+      <div class="fr-footer-credit">
+        <span>Created by <strong>Dr Katie Turnbull</strong></span>
+        <span>Improving the quality of care for women</span>
+      </div>
+      <div class="fr-footer-legal">
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
+    </div>
+        <p class="fr-footer-reviewed">Last reviewed: 15 August 2026</p>
+    <p class="fr-footer-disclaimer">This site does not own or host any linked content. All materials are the property of their respective authors.</p>
+  </footer>
+
+  <script>
+    const languages = [
+      { name: "Arabic",     native: "العربية",         slug: "arabic",     flag: "🇸🇦" },
+      { name: "Bengali",    native: "বাংলা",           slug: "bengali",    flag: "🇧🇩" },
+      { name: "Bulgarian",  native: "Български",       slug: "bulgarian",  flag: "🇧🇬" },
+      { name: "Cantonese",  native: "廣東話",           slug: "cantonese",  flag: "🇭🇰" },
+      { name: "English",    native: "English",         slug: "english",    flag: "🇬🇧" },
+      { name: "French",     native: "Français",        slug: "french",     flag: "🇫🇷" },
+      { name: "Hindi",      native: "हिन्दी",           slug: "hindi",      flag: "🇮🇳" },
+      { name: "Indonesian", native: "Bahasa Indonesia", slug: "indonesian", flag: "🇮🇩" },
+      { name: "Italian",    native: "Italiano",        slug: "italian",    flag: "🇮🇹" },
+      { name: "Kurdish",    native: "کوردیی سۆرانی",   slug: "kurdish",    flag: "🇮🇶" },
+      { name: "Mandarin",   native: "中文",             slug: "mandarin",   flag: "🇨🇳" },
+      { name: "Polish",     native: "Polski",          slug: "polish",     flag: "🇵🇱" },
+      { name: "Portuguese", native: "Português",       slug: "portuguese", flag: "🇵🇹" },
+      { name: "Romanian",   native: "Română",          slug: "romanian",   flag: "🇷🇴" },
+      { name: "Russian",    native: "Русский",         slug: "russian",    flag: "🇷🇺" },
+      { name: "Spanish",    native: "Español",         slug: "spanish",    flag: "🇪🇸" },
+      { name: "Turkish",    native: "Türkçe",          slug: "turkish",    flag: "🇹🇷" },
+      { name: "Ukrainian",  native: "Українська",      slug: "ukrainian",  flag: "🇺🇦" },
+      { name: "Urdu",       native: "اردو",            slug: "urdu",       flag: "🇵🇰" },
+      { name: "Vietnamese", native: "Tiếng Việt",      slug: "vietnamese", flag: "🇻🇳" },
+    ];
+    function renderLangs(list) {
+      const grid = document.getElementById('lang-grid');
+      const label = document.getElementById('section-label');
+      grid.innerHTML = '';
+      label.textContent = list.length === languages.length ? '20 languages available' : list.length + ' language' + (list.length !== 1 ? 's' : '') + ' found';
+      list.forEach(lang => {
+        const a = document.createElement('a');
+        a.href = lang.slug + '.html';
+        a.className = 'fr-lang-card' + (lang.slug === suggestedSlug ? ' fr-lang-card-suggested' : '');
+        a.innerHTML = (lang.slug === suggestedSlug ? '<span class="fr-lang-badge">Suggested</span>' : '') +
+          '<span class="fr-lang-flag" aria-hidden="true">' + lang.flag + '</span><div><div class="fr-lang-native">' + lang.native + '</div><div class="fr-lang-name">' + lang.name + '</div></div>';
+        grid.appendChild(a);
+      });
+    }
+    function orderedForDisplay() {
+      if (!suggestedSlug) return languages;
+      const match = languages.find(l => l.slug === suggestedSlug);
+      if (!match) return languages;
+      return [match, ...languages.filter(l => l.slug !== suggestedSlug)];
+    }
+    function filterLangs(query) {
+      const q = query.toLowerCase().trim();
+      if (!q) { renderLangs(orderedForDisplay()); return; }
+      renderLangs(languages.filter(l => l.name.toLowerCase().includes(q) || l.native.toLowerCase().includes(q)));
+    }
+    function frDetectLangSlug() {
+      const map = {
+        ar: 'arabic', bn: 'bengali', bg: 'bulgarian', yue: 'cantonese', en: 'english',
+        fr: 'french', hi: 'hindi', id: 'indonesian', it: 'italian', ku: 'kurdish',
+        ckb: 'kurdish', kmr: 'kurdish', zh: 'mandarin', cmn: 'mandarin', pl: 'polish',
+        pt: 'portuguese', ro: 'romanian', ru: 'russian', es: 'spanish', tr: 'turkish',
+        uk: 'ukrainian', ur: 'urdu', vi: 'vietnamese'
+      };
+      const validSlugs = languages.map(l => l.slug);
+      const codes = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
+      for (const raw of codes) {
+        if (!raw) continue;
+        const code = raw.toLowerCase();
+        // Cantonese-specific hints before falling back to generic 'zh'
+        if (code === 'zh-hk' || code === 'zh-mo' || code.startsWith('yue')) return 'cantonese';
+        if (map[code] && validSlugs.includes(map[code])) return map[code];
+        const primary = code.split('-')[0];
+        if (map[primary] && validSlugs.includes(map[primary])) return map[primary];
+      }
+      return null;
+    }
+    const suggestedSlug = frDetectLangSlug();
+    renderLangs(orderedForDisplay());
+  </script>
+
+  <script>
+    var FR_SCALE_LEVELS = ['normal', 'large', 'xlarge'];
+    function frApplyScale(v) {
+      document.documentElement.classList.remove('fr-scale-lg', 'fr-scale-xl');
+      if (v === 'large') document.documentElement.classList.add('fr-scale-lg');
+      else if (v === 'xlarge') document.documentElement.classList.add('fr-scale-xl');
+      var downBtn = document.getElementById('fr-scale-down');
+      var upBtn = document.getElementById('fr-scale-up');
+      if (downBtn) downBtn.disabled = (v === 'normal');
+      if (upBtn) upBtn.disabled = (v === 'xlarge');
+    }
+    function frSetScale(v) { try { localStorage.setItem('fr-scale', v); } catch (e) {} frApplyScale(v); }
+    function frStepScale(dir) {
+      var current = 'normal';
+      try { current = localStorage.getItem('fr-scale') || 'normal'; } catch (e) {}
+      var idx = FR_SCALE_LEVELS.indexOf(current);
+      if (idx === -1) idx = 0;
+      idx = Math.max(0, Math.min(FR_SCALE_LEVELS.length - 1, idx + dir));
+      frSetScale(FR_SCALE_LEVELS[idx]);
+    }
+    function frToggleContrast() {
+      var on = document.documentElement.classList.toggle('fr-contrast');
+      try { localStorage.setItem('fr-contrast', on ? '1' : '0'); } catch (e) {}
+      var btn = document.getElementById('fr-contrast-btn');
+      if (btn) { btn.setAttribute('aria-pressed', on ? 'true' : 'false'); btn.classList.toggle('active', on); }
+    }
+    (function () {
+      var s = null, c = null;
+      try { s = localStorage.getItem('fr-scale'); c = localStorage.getItem('fr-contrast'); } catch (e) {}
+      if (s) frApplyScale(s);
+      if (c === '1') {
+        document.documentElement.classList.add('fr-contrast');
+        var btn = document.getElementById('fr-contrast-btn');
+        if (btn) { btn.setAttribute('aria-pressed', 'true'); btn.classList.add('active'); }
+      }
+    })();
+  </script>
 </body>
 </html>
