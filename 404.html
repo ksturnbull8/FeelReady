@@ -103,6 +103,10 @@ html.fr-contrast {
     .fr-footer-legal a { font-size: 12px; color: var(--nhs-blue); text-decoration: none; }
     .fr-footer-legal a:hover { text-decoration: underline; }
     .fr-footer-disclaimer { font-size: 11px; color: var(--nhs-grey2); text-align: center; padding-top: 0.5rem; border-top: 1px solid var(--nhs-grey4); margin-top: 0.6rem; }
+    .fr-feedback-wrap { display: flex; justify-content: center; padding: 12px 0 2px; }
+    .fr-feedback-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--nhs-blue); background: white; border: 1.5px solid var(--nhs-blue-light); border-radius: 20px; padding: 8px 18px; text-decoration: none; transition: all 0.15s; }
+    .fr-feedback-btn:hover { border-color: var(--nhs-blue-soft); background: var(--nhs-blue-pale); }
+    .fr-feedback-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 
     @media (max-width: 600px) {
       .fr-header { padding: 0 0.85rem; height: 64px; }
@@ -165,6 +169,12 @@ html.fr-contrast {
       <div class="fr-footer-legal">
         <img src="nhs-lothian-charity-logo.png" alt="NHS Lothian Charity">
       </div>
+    </div>
+    <div class="fr-feedback-wrap">
+      <a class="fr-feedback-btn" href="https://app.onlinesurveys.jisc.ac.uk/s/nhslothiansurveys/qr-code-obstetric-anaesthetic-consent" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Give feedback on this site
+      </a>
     </div>
     <p class="fr-footer-disclaimer">This site does not own or host any linked content. All materials are the property of their respective authors.</p>
   </footer>

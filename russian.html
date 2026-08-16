@@ -146,7 +146,11 @@ html.fr-contrast {
     [dir="rtl"] .fr-back-btn svg { transform: scaleX(-1); }
     [dir="rtl"] .fr-video-chevron { transform: scaleX(-1); }
     [dir="rtl"] .fr-video-item.active .fr-video-chevron { transform: scaleX(-1) rotate(90deg); }
-    .fr-footer-reviewed { font-size: 11px; color: var(--nhs-grey2); text-align: center; margin-top: 0.4rem; }
+        .fr-feedback-wrap { display: flex; justify-content: center; padding: 12px 0 2px; }
+    .fr-feedback-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--nhs-blue); background: white; border: 1.5px solid var(--nhs-blue-light); border-radius: 20px; padding: 8px 18px; text-decoration: none; transition: all 0.15s; }
+    .fr-feedback-btn:hover { border-color: var(--nhs-blue-soft); background: var(--nhs-blue-pale); }
+    .fr-feedback-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+.fr-footer-reviewed { font-size: 11px; color: var(--nhs-grey2); text-align: center; margin-top: 0.4rem; }
 </style>
 <script data-goatcounter="https://ksturnbull8.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -262,7 +266,13 @@ html.fr-contrast {
         <img src="nhs-lothian-charity-logo.png" alt="NHS Lothian Charity">
       </div>
     </div>
-        <p class="fr-footer-reviewed">Последняя проверка: 15 августа 2026 г.</p>
+            <div class="fr-feedback-wrap">
+      <a class="fr-feedback-btn" href="https://app.onlinesurveys.jisc.ac.uk/s/nhslothiansurveys/qr-code-obstetric-anaesthetic-consent" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Give feedback on this site
+      </a>
+    </div>
+<p class="fr-footer-reviewed">Последняя проверка: 15 августа 2026 г.</p>
     <p class="fr-footer-disclaimer">Этот сайт не владеет и не размещает какой-либо связанный контент. Все материалы являются собственностью их соответствующих авторов.</p>
   </footer>
 
