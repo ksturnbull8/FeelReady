@@ -76,16 +76,17 @@
     .fr-footer-disclaimer { font-size: 11px; color: var(--nhs-grey2); text-align: center; padding-top: 0.5rem; border-top: 1px solid var(--nhs-grey4); margin-top: 0.6rem; }
     @media (max-width: 600px) {
       .fr-footer-row { grid-template-columns: 1fr; gap: 8px; }
-      .fr-footer-legal { justify-content: flex-start; }
-      .fr-footer-credit { align-items: flex-start; }
+      .fr-footer-owners { justify-content: center; }
+      .fr-footer-credit { align-items: center; }
     }
   
     /* --- Accessibility: text size, contrast, RTL polish --- */
-    .fr-a11y-bar { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; background: white; border-bottom: 1px solid var(--nhs-grey4); padding: 6px 12px; }
-    .fr-a11y-btn { font-family: 'DM Sans', "DM Sans", sans-serif; font-size: 13px; font-weight: 500; padding: 4px 11px; border-radius: 20px; border: 1px solid var(--nhs-grey4); background: white; color: var(--nhs-charcoal); cursor: pointer; transition: all 0.15s; }
+    .fr-a11y-bar { display: flex; align-items: center; justify-content: flex-end; gap: 6px; background: white; border-bottom: 1px solid var(--nhs-grey4); padding: 5px 10px; }
+    .fr-a11y-btn { font-family: 'DM Sans', "DM Sans", sans-serif; font-size: 13px; font-weight: 600; width: 30px; height: 30px; padding: 0; border-radius: 50%; border: 1px solid var(--nhs-grey4); background: white; color: var(--nhs-charcoal); cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; line-height: 1; }
     .fr-a11y-btn.active { background: var(--nhs-blue); color: white; border-color: var(--nhs-blue); }
     .fr-a11y-btn:hover:not(.active) { border-color: var(--nhs-blue-soft); color: var(--nhs-blue); }
-    .fr-a11y-sep { width: 1px; height: 18px; background: var(--nhs-grey4); margin: 0 4px; }
+    .fr-a11y-btn svg { width: 15px; height: 15px; }
+    .fr-a11y-sep { width: 1px; height: 18px; background: var(--nhs-grey4); margin: 0 2px; flex-shrink: 0; }
     html.fr-scale-lg body { zoom: 1.15; }
     html.fr-scale-xl body { zoom: 1.3; }
     html.fr-contrast {
@@ -113,11 +114,12 @@
     </a>
   </header>
   <div class="fr-a11y-bar" role="group" aria-label="Accessibility settings">
-    <button type="button" class="fr-a11y-btn active" id="fr-scale-normal" onclick="frSetScale('normal')">A</button>
-    <button type="button" class="fr-a11y-btn" id="fr-scale-lg" onclick="frSetScale('large')">A+</button>
-    <button type="button" class="fr-a11y-btn" id="fr-scale-xl" onclick="frSetScale('xlarge')">A++</button>
+    <button type="button" class="fr-a11y-btn" id="fr-scale-down" onclick="frStepScale(-1)" aria-label="Decrease text size" title="Decrease text size">A&minus;</button>
+    <button type="button" class="fr-a11y-btn" id="fr-scale-up" onclick="frStepScale(1)" aria-label="Increase text size" title="Increase text size">A+</button>
     <span class="fr-a11y-sep"></span>
-    <button type="button" class="fr-a11y-btn" id="fr-contrast-btn" onclick="frToggleContrast()" aria-pressed="false">High contrast</button>
+    <button type="button" class="fr-a11y-btn" id="fr-contrast-btn" onclick="frToggleContrast()" aria-pressed="false" aria-label="Toggle high contrast" title="High contrast">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor" stroke="none"/></svg>
+    </button>
   </div>
 
 
@@ -148,13 +150,12 @@
         <a href="https://rcoa.ac.uk" target="_blank" rel="noopener">RCoA</a>
         <span class="fr-footer-sep">·</span>
         <a href="https://www.nhslothian.scot" target="_blank" rel="noopener">NHS Lothian</a>
+        <span class="fr-footer-sep">·</span>
+        <a href="disclaimer.html">Disclaimer</a>
       </div>
       <div class="fr-footer-credit">
         <span>Created by <strong>Dr Katie Turnbull</strong></span>
         <span>Improving the quality of care for women</span>
-      </div>
-      <div class="fr-footer-legal">
-        <a href="disclaimer.html">Disclaimer</a>
       </div>
     </div>
         <p class="fr-footer-reviewed">Terakhir ditinjau: 15 Agustus 2026</p>
@@ -256,16 +257,25 @@
   </script>
 
   <script>
+    var FR_SCALE_LEVELS = ['normal', 'large', 'xlarge'];
     function frApplyScale(v) {
       document.documentElement.classList.remove('fr-scale-lg', 'fr-scale-xl');
-      document.querySelectorAll('.fr-a11y-btn').forEach(function(b){
-        if (b.id === 'fr-scale-normal' || b.id === 'fr-scale-lg' || b.id === 'fr-scale-xl') b.classList.remove('active');
-      });
-      if (v === 'large') { document.documentElement.classList.add('fr-scale-lg'); var el = document.getElementById('fr-scale-lg'); if (el) el.classList.add('active'); }
-      else if (v === 'xlarge') { document.documentElement.classList.add('fr-scale-xl'); var el2 = document.getElementById('fr-scale-xl'); if (el2) el2.classList.add('active'); }
-      else { var el3 = document.getElementById('fr-scale-normal'); if (el3) el3.classList.add('active'); }
+      if (v === 'large') document.documentElement.classList.add('fr-scale-lg');
+      else if (v === 'xlarge') document.documentElement.classList.add('fr-scale-xl');
+      var downBtn = document.getElementById('fr-scale-down');
+      var upBtn = document.getElementById('fr-scale-up');
+      if (downBtn) downBtn.disabled = (v === 'normal');
+      if (upBtn) upBtn.disabled = (v === 'xlarge');
     }
     function frSetScale(v) { try { localStorage.setItem('fr-scale', v); } catch (e) {} frApplyScale(v); }
+    function frStepScale(dir) {
+      var current = 'normal';
+      try { current = localStorage.getItem('fr-scale') || 'normal'; } catch (e) {}
+      var idx = FR_SCALE_LEVELS.indexOf(current);
+      if (idx === -1) idx = 0;
+      idx = Math.max(0, Math.min(FR_SCALE_LEVELS.length - 1, idx + dir));
+      frSetScale(FR_SCALE_LEVELS[idx]);
+    }
     function frToggleContrast() {
       var on = document.documentElement.classList.toggle('fr-contrast');
       try { localStorage.setItem('fr-contrast', on ? '1' : '0'); } catch (e) {}
