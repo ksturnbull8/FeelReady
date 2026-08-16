@@ -47,6 +47,10 @@
     .fr-video-item.active .fr-video-play-icon svg { color: white; }
     .fr-video-title-native { font-size: 19px; font-weight: 500; color: var(--nhs-charcoal); }
     .fr-video-title-en { font-size: 14px; color: var(--nhs-grey2); font-style: italic; margin-top: 2px; }
+
+    .fr-video-fallback { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #1e2d3d; color: white; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; gap: 6px; font-size: 15px; line-height: 1.5; }
+    .fr-video-fallback.show { display: flex; }
+    .fr-video-fallback a { color: #9BD4F5; font-weight: 500; }
     .fr-video-chevron { margin-left: auto; color: var(--nhs-grey3); transition: transform 0.2s; flex-shrink: 0; }
     .fr-video-item.active .fr-video-chevron { transform: rotate(90deg); color: var(--nhs-blue); }
     .fr-player-wrap { display: none; }
@@ -89,7 +93,22 @@
     .fr-a11y-sep { width: 1px; height: 18px; background: var(--nhs-grey4); margin: 0 2px; flex-shrink: 0; }
     html.fr-scale-lg body { zoom: 1.15; }
     html.fr-scale-xl body { zoom: 1.3; }
-    html.fr-contrast {
+        html.fr-dark {
+      --nhs-blue: #4A9FD4; --nhs-blue-soft: #7cc3f0; --nhs-blue-light: #2c3844;
+      --nhs-blue-pale: #1a2530; --nhs-charcoal: #e8edf2; --nhs-charcoal-mid: #c3ccd4;
+      --nhs-grey2: #93a0ad; --nhs-grey3: #6b7885; --nhs-grey4: #2c3844; --nhs-grey5: #10151b;
+    }
+    html.fr-dark body { background: var(--nhs-grey5); }
+    html.fr-dark .fr-a11y-bar, html.fr-dark .fr-a11y-btn, html.fr-dark .fr-footer,
+    html.fr-dark .fr-lang-card, html.fr-dark .fr-search-bar, html.fr-dark .fr-phrase-card,
+    html.fr-dark .fr-resource-card, html.fr-dark .fr-trans-pill, html.fr-dark .fr-doc-card,
+    html.fr-dark .fr-video-card, html.fr-dark .fr-404-btn-secondary, html.fr-dark .fr-lang-btn,
+    html.fr-dark .fr-subtitle-controls, html.fr-dark .fr-video-item, html.fr-dark .fr-note {
+      background: #1a2530;
+    }
+    html.fr-dark .fr-footer-owners img { background: white; border-radius: 4px; padding: 2px; }
+    html.fr-dark .fr-continue-banner { background: #1a2530; }
+html.fr-contrast {
       --nhs-blue: #002d5c; --nhs-blue-soft: #002d5c; --nhs-blue-light: #000000;
       --nhs-blue-pale: #ffffff; --nhs-charcoal: #000000; --nhs-charcoal-mid: #000000;
       --nhs-grey2: #000000; --nhs-grey3: #000000; --nhs-grey4: #000000; --nhs-grey5: #ffffff;
@@ -106,6 +125,7 @@
 </style>
 </head>
 <body>
+  <script>try{localStorage.setItem('fr-last-lang',JSON.stringify({"slug":"indonesian","native":"Bahasa Indonesia","name":"Indonesian","flag":"🇮🇩"}));}catch(e){}</script>
   <header class="fr-header">
     <a href="index.html" class="fr-logo">feel<span>ready</span></a>
     <a href="index.html" class="fr-back-btn">
@@ -119,6 +139,9 @@
     <span class="fr-a11y-sep"></span>
     <button type="button" class="fr-a11y-btn" id="fr-contrast-btn" onclick="frToggleContrast()" aria-pressed="false" aria-label="Toggle high contrast" title="High contrast">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor" stroke="none"/></svg>
+    </button>
+    <button type="button" class="fr-a11y-btn" id="fr-dark-btn" onclick="frToggleDark()" aria-pressed="false" aria-label="Toggle dark mode" title="Dark mode">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
   </div>
 
@@ -188,7 +211,13 @@
             <div class="fr-video-chevron"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
           </div>
           <div class="fr-player-wrap" id="player-wrap-${vid.slug}">
-            <div class="fr-iframe-wrap"><div id="vimeo-${vid.slug}"></div></div>
+            <div class="fr-iframe-wrap">
+              <div id="vimeo-${vid.slug}"></div>
+              <div class="fr-video-fallback" id="fallback-${vid.slug}">
+                <p>This video couldn't load. Check your connection, or</p>
+                <a href="https://vimeo.com/${vid.vimeo}" target="_blank" rel="noopener">open it directly on Vimeo</a>.
+              </div>
+            </div>
             <div class="fr-subtitle-bar" id="subtitle-bar-${vid.slug}">
               <div class="fr-subtitle-text empty" id="subtitle-text-${vid.slug}">— subtitles will appear here —</div>
             </div>
@@ -204,6 +233,14 @@
       });
     }
 
+    function showFallback(slug) {
+      const fb = document.getElementById("fallback-" + slug);
+      if (fb) fb.classList.add("show");
+    }
+    function hideFallback(slug) {
+      const fb = document.getElementById("fallback-" + slug);
+      if (fb) fb.classList.remove("show");
+    }
     function toggleVideo(slug) {
       const item = document.getElementById("item-" + slug);
       const isActive = item.classList.contains("active");
@@ -211,11 +248,14 @@
       Object.values(subtitleIntervals).forEach(id => clearInterval(id));
       if (!isActive) {
         item.classList.add("active");
+        hideFallback(slug);
         if (!players[slug]) {
           const vid = VIDEOS.find(v => v.slug === slug);
           const player = new Vimeo.Player("vimeo-" + slug, { id: vid.vimeo, responsive: true, title: false, byline: false, portrait: false });
           players[slug] = player;
-          player.ready().then(() => startSubtitles(slug));
+          const loadTimer = setTimeout(() => showFallback(slug), 12000);
+          player.ready().then(() => { clearTimeout(loadTimer); startSubtitles(slug); }).catch(() => { clearTimeout(loadTimer); showFallback(slug); });
+          player.on("error", () => showFallback(slug));
         } else {
           startSubtitles(slug);
         }
@@ -282,14 +322,25 @@
       var btn = document.getElementById('fr-contrast-btn');
       if (btn) { btn.setAttribute('aria-pressed', on ? 'true' : 'false'); btn.classList.toggle('active', on); }
     }
+    function frToggleDark() {
+      var on = document.documentElement.classList.toggle('fr-dark');
+      try { localStorage.setItem('fr-dark', on ? '1' : '0'); } catch (e) {}
+      var btn = document.getElementById('fr-dark-btn');
+      if (btn) { btn.setAttribute('aria-pressed', on ? 'true' : 'false'); btn.classList.toggle('active', on); }
+    }
     (function () {
-      var s = null, c = null;
-      try { s = localStorage.getItem('fr-scale'); c = localStorage.getItem('fr-contrast'); } catch (e) {}
+      var s = null, c = null, d = null;
+      try { s = localStorage.getItem('fr-scale'); c = localStorage.getItem('fr-contrast'); d = localStorage.getItem('fr-dark'); } catch (e) {}
       if (s) frApplyScale(s);
       if (c === '1') {
         document.documentElement.classList.add('fr-contrast');
         var btn = document.getElementById('fr-contrast-btn');
         if (btn) { btn.setAttribute('aria-pressed', 'true'); btn.classList.add('active'); }
+      }
+      if (d === '1') {
+        document.documentElement.classList.add('fr-dark');
+        var dbtn = document.getElementById('fr-dark-btn');
+        if (dbtn) { dbtn.setAttribute('aria-pressed', 'true'); dbtn.classList.add('active'); }
       }
     })();
   </script>
