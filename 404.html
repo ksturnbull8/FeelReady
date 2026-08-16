@@ -35,7 +35,8 @@
     }
     .fr-logo { display: inline-flex; align-items: center; gap: 8px; font-size: 27px; font-weight: 500; color: white; text-decoration: none; }
     .fr-logo img { height: 34px; width: 34px; border-radius: 50%; display: block; }
-    .fr-logo span { color: #9BD4F5; }
+    .fr-logo-text { color: white; }
+    .fr-logo-text span { color: #9BD4F5; }
 
     .fr-a11y-bar { display: flex; align-items: center; justify-content: flex-end; gap: 6px; background: white; border-bottom: 1px solid var(--nhs-grey4); padding: 5px 10px; }
     .fr-a11y-btn { font-family: 'DM Sans', "DM Sans", sans-serif; font-size: 13px; font-weight: 600; width: 30px; height: 30px; padding: 0; border-radius: 50%; border: 1px solid var(--nhs-grey4); background: white; color: var(--nhs-charcoal); cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; line-height: 1; }
@@ -111,7 +112,7 @@ html.fr-contrast {
 </head>
 <body>
   <header class="fr-header">
-    <a href="index.html" class="fr-logo"><img src="site-logo.png" alt="">feel<span>ready</span></a>
+    <a href="index.html" class="fr-logo"><img src="site-logo.png" alt=""><span class="fr-logo-text">feel<span>ready</span></span></a>
   </header>
 
   <div class="fr-a11y-bar" role="group" aria-label="Accessibility settings">
