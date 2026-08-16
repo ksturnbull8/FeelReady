@@ -83,7 +83,7 @@
     .fr-lang-btn.active { background: var(--nhs-blue); color: white; border-color: var(--nhs-blue); }
     .fr-lang-btn:hover:not(.active) { border-color: var(--nhs-blue-soft); color: var(--nhs-blue); }
     .fr-footer { background: white; border-top: 1px solid var(--nhs-grey4); padding: 0.75rem 1.75rem; }
-    .fr-footer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
+    .fr-footer-row { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 12px; max-width: 1100px; margin: 0 auto; }
     .fr-footer-owners { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .fr-footer-owners img { height: 36px; width: auto; display: block; }
     .fr-footer-legal { display: flex; justify-content: flex-end; align-items: center; }
@@ -91,7 +91,7 @@
     .fr-footer-owners a { font-size: 12px; color: var(--nhs-blue); text-decoration: none; }
     .fr-footer-owners a:hover { text-decoration: underline; }
     .fr-footer-sep { color: var(--nhs-grey4); font-size: 12px; }
-    .fr-footer-credit { font-size: 12px; color: var(--nhs-grey2); display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+    .fr-footer-credit { font-size: 12px; color: var(--nhs-grey2); display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; text-align: center; padding: 8px 0 0; }
     .fr-footer-credit strong { color: var(--nhs-charcoal-mid); font-weight: 500; }
     .fr-footer-legal { display: flex; justify-content: flex-end; }
     .fr-footer-legal a { font-size: 12px; color: var(--nhs-blue); text-decoration: none; }
@@ -146,11 +146,11 @@ html.fr-contrast {
     [dir="rtl"] .fr-back-btn svg { transform: scaleX(-1); }
     [dir="rtl"] .fr-video-chevron { transform: scaleX(-1); }
     [dir="rtl"] .fr-video-item.active .fr-video-chevron { transform: scaleX(-1) rotate(90deg); }
-        .fr-feedback-wrap { display: flex; justify-content: center; padding: 12px 0 2px; }
+        .fr-feedback-wrap { display: flex; justify-content: center; }
     .fr-feedback-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--nhs-blue); background: white; border: 1.5px solid var(--nhs-blue-light); border-radius: 20px; padding: 8px 18px; text-decoration: none; transition: all 0.15s; }
     .fr-feedback-btn:hover { border-color: var(--nhs-blue-soft); background: var(--nhs-blue-pale); }
     .fr-feedback-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
-.fr-footer-reviewed { font-size: 11px; color: var(--nhs-grey2); text-align: center; margin-top: 0.4rem; }
+.fr-footer-reviewed { font-size: 11px; color: var(--nhs-grey2); text-align: center; margin-top: 0.15rem; }
 </style>
 <script data-goatcounter="https://ksturnbull8.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -272,22 +272,23 @@ html.fr-contrast {
       <span class="fr-footer-sep">·</span>
       <a href="disclaimer.html">Disclaimer</a>
       </div>
-      <div class="fr-footer-credit">
-        <span>Създадено от <strong>Dr Katie Turnbull</strong></span>
-        <span>Подобряване на качеството на грижите за жени</span>
-      </div>
-    <div class="fr-footer-legal">
-        <img src="nhs-lothian-charity-logo.png" alt="NHS Lothian Charity">
-      </div>
-    </div>
             <div class="fr-feedback-wrap">
       <a class="fr-feedback-btn" href="https://app.onlinesurveys.jisc.ac.uk/s/nhslothiansurveys/qr-code-obstetric-anaesthetic-consent" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         Give feedback on this site
       </a>
     </div>
-<p class="fr-footer-reviewed">Последен преглед: 15 август 2026 г.</p>
-    <p class="fr-footer-disclaimer">Този сайт не притежава и не хоства никакво свързано съдържание. Всички материали са собственост на съответните им автори.</p>
+      <div class="fr-footer-legal">
+        <img src="nhs-lothian-charity-logo.png" alt="NHS Lothian Charity">
+      </div>
+    </div><div class="fr-footer-credit">
+        <span>Създадено от <strong>Dr Katie Turnbull</strong></span>
+        <span class="fr-footer-sep">·</span>
+        <span>Подобряване на качеството на грижите за жени</span>
+      <span class="fr-footer-sep">·</span>
+        <span>Последен преглед: 15 август 2026 г.</span>
+      </div>
+<p class="fr-footer-disclaimer">Този сайт не притежава и не хоства никакво свързано съдържание. Всички материали са собственост на съответните им автори.</p>
   </footer>
 
   <script>
