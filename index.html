@@ -33,7 +33,8 @@
       padding: 0 1.75rem; background: var(--nhs-blue); height: 60px;
       position: sticky; top: 0; z-index: 10;
     }
-    .fr-logo { font-size: 27px; font-weight: 500; color: white; text-decoration: none; }
+    .fr-logo { display: inline-flex; align-items: center; gap: 8px; font-size: 27px; font-weight: 500; color: white; text-decoration: none; }
+    .fr-logo img { height: 34px; width: 34px; border-radius: 50%; display: block; }
     .fr-logo span { color: #9BD4F5; }
     .fr-staff-btn {
       font-size: 17px; color: white; opacity: 0.85;
@@ -156,7 +157,7 @@ html.fr-contrast {
 </head>
 <body>
   <header class="fr-header">
-    <a href="index.html" class="fr-logo">feel<span>ready</span></a>
+    <a href="index.html" class="fr-logo"><img src="site-logo.png" alt="">feel<span>ready</span></a>
     <a href="staff.html" class="fr-staff-btn">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       Staff resources

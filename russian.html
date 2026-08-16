@@ -22,7 +22,8 @@
     }
     body { font-family: "DM Sans", sans-serif; color: var(--nhs-charcoal); background: var(--nhs-grey5); min-height: 100vh; }
     .fr-header { display: flex; align-items: center; justify-content: space-between; padding: 0 1.75rem; background: var(--nhs-blue); height: 60px; position: sticky; top: 0; z-index: 10; }
-    .fr-logo { font-size: 27px; font-weight: 500; color: white; text-decoration: none; }
+    .fr-logo { display: inline-flex; align-items: center; gap: 8px; font-size: 27px; font-weight: 500; color: white; text-decoration: none; }
+    .fr-logo img { height: 34px; width: 34px; border-radius: 50%; display: block; }
     .fr-logo span { color: #9BD4F5; }
     .fr-back-btn { font-size: 17px; color: white; opacity: 0.85; border: 1px solid rgba(255,255,255,0.35); background: none; padding: 6px 14px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.15s, background 0.15s; }
     .fr-back-btn:hover { opacity: 1; background: rgba(255,255,255,0.12); }
@@ -142,7 +143,7 @@ html.fr-contrast {
 <body>
   <script>try{localStorage.setItem('fr-last-lang',JSON.stringify({"slug":"russian","native":"Русский","name":"Russian","flag":"🇷🇺"}));}catch(e){}</script>
   <header class="fr-header">
-    <a href="index.html" class="fr-logo">feel<span>ready</span></a>
+    <a href="index.html" class="fr-logo"><img src="site-logo.png" alt="">feel<span>ready</span></a>
     <a href="index.html" class="fr-back-btn">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
       All languages
