@@ -50,8 +50,8 @@
     .fr-iframe-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; }
     .fr-iframe-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
     .fr-subtitle-bar { background: #1e2d3d; padding: 12px 24px; min-height: 64px; display: flex; align-items: center; justify-content: center; }
-    .fr-subtitle-text { font-size: 18px; line-height: 1.5; color: white; text-align: center; max-width: 100%; text-shadow: 0 1px 3px rgba(0,0,0,0.5); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .fr-subtitle-text.empty { color: rgba(255,255,255,0.3); font-size: 15px; font-style: italic; -webkit-line-clamp: 1; }
+    .fr-subtitle-text { font-size: 18px; line-height: 1.5; color: white; text-align: center; display: block; width: 100%; min-width: 0; overflow-wrap: break-word; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+    .fr-subtitle-text.empty { color: rgba(255,255,255,0.3); font-size: 15px; font-style: italic; }
     .fr-subtitle-controls { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: white; border-top: 1px solid var(--nhs-grey4); flex-wrap: wrap; }
     .fr-subtitle-label { font-size: 15px; color: var(--nhs-grey2); margin-right: 4px; }
     .fr-lang-btn { font-size: 15px; font-weight: 500; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--nhs-grey4); background: white; color: var(--nhs-charcoal); cursor: pointer; transition: all 0.15s; }
